@@ -3,7 +3,7 @@ Christmas comes early this year
 
 ## -2015- Hark how the bells...
 
-Attempting to learn LISP with these 25 exercises.
+Attempting to learn Java with these 25 exercises.
 
  - [ ] 1. Instructions unclear, santa was sent to outer space
  - [ ] 2.
