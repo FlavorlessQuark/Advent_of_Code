@@ -1,4 +1,5 @@
 floor = 0
+count = 0
 
 with open('input') as input:
 	while True:
@@ -9,4 +10,7 @@ with open('input') as input:
 			floor += 1
 		if (character == ')'):
 			floor -= 1
-print "Floor : " + str(floor)
+		count += 1
+		if (floor == -1):
+			break
+print "Character : " + str(count)
