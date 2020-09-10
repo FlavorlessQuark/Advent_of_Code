@@ -1,0 +1,8 @@
+for i in {1..25}
+do
+	if (( i < 10 )); then
+		mkdir day_0$i
+	else
+		mkdir day_$i
+	fi
+done

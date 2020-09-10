@@ -8,7 +8,7 @@ Checkpoint at ex25~ ~
 
 *Some Python here..*
 
-- [ ] Everything is new and shiny
+- [x] Everything is new and shiny
 - [ ] Checkpoint~~
 - [ ] Snake Master
 
