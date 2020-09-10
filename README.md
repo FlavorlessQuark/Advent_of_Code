@@ -2,6 +2,8 @@
 Christmas comes early this year
 https://adventofcode.com/
 
+Checkpoint at ex25~ ~
+
 ## -2015- Hark how the bells, sweet silver bells...
 
 *Some Python here..*
