@@ -4,7 +4,7 @@ https://adventofcode.com/
 
 ## -2015- Hark how the bells, sweet silver bells...
 
-* Some Python here.. *
+*Some Python here.. *
 
 - [ ] Everything is new and shiny
 - [ ] Checkpoint~~
@@ -12,7 +12,7 @@ https://adventofcode.com/
 
 ## -2016- Angels we have heard on high, singing sweetly through the night..
 
-* Some Java there.. *
+*Some Java there.. *
 
 - [ ] Time to dance
 - [ ] | Point de control |
@@ -20,7 +20,7 @@ https://adventofcode.com/
 
 ## -2017- I'm dreaming of a white Christmas..
 
-* Add a hint of Go *
+*Add a hint of Go *
 
 - [ ] Let's GO
 - [ ] Geommunso \o/
@@ -28,7 +28,7 @@ https://adventofcode.com/
 
 ## -2018- Silent night! Holy night! All is calm, all is bright...
 
-* And a pinch of Rust *
+*And a pinch of Rust *
 
 - [ ] Shaked off the Rust
 - [ ] ~ Jiancha Zhan ~
@@ -36,7 +36,7 @@ https://adventofcode.com/
 
 ## -2019- On the first day of Christmas, my true love gave to me...
 
-* Maybe a little bit of Perl *
+*Maybe a little bit of Perl *
 
 - [ ] See a Perl form, a diamond in the rough...
 - [ ] Chekkupointo >.<
