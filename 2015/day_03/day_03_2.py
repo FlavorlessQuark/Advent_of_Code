@@ -24,14 +24,15 @@ def parse_input(input, person):
 		houses[key] = 1
 
 santa = San_Rob()
+rob = San_Rob()
 with open('input') as input:
 	while 1:
 		instruction = input.read(1)
 		if not instruction:
 			break
 		parse_input(instruction, santa)
-	#	instruction = input.read(1)
-	#	if not instruction:
-	#		break
-	#	parse_input(instruction, rob_pos_x,rob_pos_y)
+		instruction = input.read(1)
+		if not instruction:
+			break
+		parse_input(instruction, rob)
 print("houses " + str(len(houses)))
