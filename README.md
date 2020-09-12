@@ -9,6 +9,9 @@ https://adventofcode.com/
 *Some Python here..*
 
 - [x] Everything is new and shiny
+
+**For the record day 6 took forever because this 990 was supposed to be 999**
+![alt text](https://discordapp.com/channels/395976754566791178/432508907701665802/754261333582675978)
 - [ ] Checkpoint~~
 - [ ] Snake Master
 
