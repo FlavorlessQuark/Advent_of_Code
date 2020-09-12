@@ -11,7 +11,7 @@ https://adventofcode.com/
 - [x] Everything is new and shiny
 
 **For the record day 6 took forever because this 990 was supposed to be 999**
-![alt text](https://discordapp.com/channels/395976754566791178/432508907701665802/754261333582675978)
+![alt text](https://cdn.discordapp.com/attachments/432508907701665802/754261333469298728/unknown.png)
 - [ ] Checkpoint~~
 - [ ] Snake Master
 
