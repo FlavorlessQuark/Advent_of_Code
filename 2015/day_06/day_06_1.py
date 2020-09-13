@@ -7,8 +7,7 @@ def count_lights():
 
 	for i in range(0, 999):
 		for n in range(0, 999):
-			if (grid[i][n] == 1):
-				count += 1
+			count += grid[i][n]
 	return count
 
 def parse(line):
