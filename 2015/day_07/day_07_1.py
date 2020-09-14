@@ -6,12 +6,12 @@ def parse(step):
 	print("Now parsing" + step)
 	for wire_instruction in instructions:
 		commands = wire_instruction
-		if wire_instruction[len(wire_instruction) - 1] == step:
+		if wire_instruction[-1] == step:
 			break
 
-	wire = commands[len(commands) - 1]
+	wire = commands[- 1]
 	if len(commands) == 3:
-		if commands[0][0] >= '0' and commands[0][0] <= '9':
+		if '0' <= commands[0][0] <= '9':
 			circuit[wire] = int(commands[0])
 		else:
 			if commands[0] not in circuit:
@@ -36,7 +36,7 @@ def parse(step):
 	elif commands[2] not in circuit:
 		parse(commands[2])
 	if commands[1] == "AND":
-		if commands[0][0] >= '0' and commands[0][0] <= '9':
+		if str.isdigit(commands[0]):
 			circuit[wire] = int(commands[0]) & circuit[commands[2]]
 		else:
 			circuit[wire] = circuit[commands[0]] & circuit[commands[2]]
@@ -44,7 +44,6 @@ def parse(step):
 		circuit[wire] = circuit[commands[0]] | circuit[commands[2]]
 
 with open('input') as input:
-	for line in input:
-		instructions.append(line.split())
+	instructions = [line.split() for line in input)
 	parse('a')
-print(str(circuit.get('a')))
+print(circuit.get('a'))
