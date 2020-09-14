@@ -1,54 +1,50 @@
 circuit = {}
-gate = []
 
-def parse(inpu):
-	global gate
-	data = inpu.split()
-	last = data[len(data) - 1]
+instructions = []
 
-	if wire in circuit:
-		return False
-	if (inpu[0] >= '0' and inpu[0] <='9'):
-		circuit[wire] = int(data[0])
-		return True
+def parse(step):
+	print("Now parsing" + step)
+	for wire_instruction in instructions:
+		commands = wire_instruction
+		if wire_instruction[len(wire_instruction) - 1] == step:
+			break
 
-	if data[0] == "NOT":
-		if data[1] not in circuit:
-			if inpu not in gate:
-				gate.append(inpu)
-			return False
-		circuit[wire] = ~circuit[data[1]]
-		if (circuit[wire] < 0):
-			circuit[wire] += 65536
+	wire = commands[len(commands) - 1]
+	if len(commands) == 3:
+		if commands[0][0] >= '0' and commands[0][0] <= '9':
+			circuit[wire] = int(commands[0])
+		else:
+			if commands[0] not in circuit:
+				parse(commands[0])
+			circuit[wire] = circuit[commands[0]]
+		return
 
-	elif data[0] not in circuit:
-		if (inpu not in gate):
-			gate.append(inpu)
-		return False
-	elif data[1] == "RSHIFT":
-		circuit[wire] = circuit[data[0]] >> int(data[2])
-	elif data[1] == "LSHIFT":
-		circuit[wire] = circuit[data[0]] << int(data[2])
+	if commands[0] == "NOT":
+		if commands[1] not in circuit:
+			parse(commands[1])
+		circuit[wire] = 0xffff - circuit[commands[1]]
+		return
 
-	if (len(data) == 3):
-		circuit[wire] = circuit[data[0]]
-	elif data[2] not in circuit:
-		if (inpu not in gate):
-			gate.append(inpu)
-		return False
-	elif data[1] == "OR":
-		circuit[wire] = circuit[data[0]] | circuit[data[2]]
-	elif data[1] == "AND":
-		circuit[wire] = circuit[data[0]] & circuit[data[2]]
-	if circuit[wire] > 65535:
-		circuit[wire] -= 65535
-	if inpu in gate:
-		gate.remove(inpu)
-	return True
+	if commands[0] not in circuit and (commands[0][0] < '0' or commands[0][0] > '9'):
+		parse(commands[0])
+
+	if commands[1] == "RSHIFT":
+		circuit[wire] = circuit[commands[0]] >> int(commands[2])
+	elif commands[1] == "LSHIFT":
+		circuit[wire] = circuit[commands[0]] << int(commands[2])
+
+	elif commands[2] not in circuit:
+		parse(commands[2])
+	if commands[1] == "AND":
+		if commands[0][0] >= '0' and commands[0][0] <= '9':
+			circuit[wire] = int(commands[0]) & circuit[commands[2]]
+		else:
+			circuit[wire] = circuit[commands[0]] & circuit[commands[2]]
+	elif commands[1] == "OR":
+		circuit[wire] = circuit[commands[0]] | circuit[commands[2]]
 
 with open('input') as input:
 	for line in input:
-		for thing in gate:
-			parse(thing)
-		parse(line)
+		instructions.append(line.split())
+	parse('a')
 print(str(circuit.get('a')))
