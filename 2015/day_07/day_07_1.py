@@ -44,6 +44,6 @@ def parse(step):
 		circuit[wire] = circuit[commands[0]] | circuit[commands[2]]
 
 with open('input') as input:
-	instructions = [line.split() for line in input)
+	instructions = [line.split() for line in input]
 	parse('a')
 print(circuit.get('a'))
