@@ -2,7 +2,7 @@
 Christmas comes early this year
 https://adventofcode.com/
 
-~ ~ Checkpoint at day 14 ~ ~
+~ ~ Checkpoint at day 12 ~ ~
 
 ## -2015- Hark how the bells, sweet silver bells...
 
