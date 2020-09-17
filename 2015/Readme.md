@@ -1,11 +1,11 @@
-The Path of the Snake:
+## The Path of the Snake:
 
 Thou shalt not be afraid to *import*
 
 To reach true understanding is to comprehend [Comprehensions][0]
 
 
-Scales to be earned:
+## Scales to be earned:
 
  - [ ] SCale of the Sun:
 	- [ ] Day01: To be redone using regex (import re)
