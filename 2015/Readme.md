@@ -13,6 +13,7 @@ To reacheth true und'rstanding is to comprehend [Comprehensions][0]
  - [ ] Scale of Speed:
 	- [ ] Day05: Surely this can be done with only one iteration...
 	- [ ] Day06: Did somebody say [Hash_Table, Blessed Tool of the SpeedSeeker] ?
+	- [ ] Day10: Need to replace in by str for part 2 (number gets too big)
 
  - [ ] Scale of the Moon:
  	- [ ] Day08: is written more like C. More slithery thinking is required. Perhaps a more object oriented approach.
