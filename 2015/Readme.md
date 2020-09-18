@@ -1,7 +1,9 @@
 ## The Path of the Snake:
 
 Thou shan't be afraid to *import*
+
 If 't be true thy mind hast hought of it, then there exists an *import*
+
 To reacheth true und'rstanding is to comprehend [Comprehensions][0]
 
 
