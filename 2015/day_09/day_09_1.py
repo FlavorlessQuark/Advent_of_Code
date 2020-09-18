@@ -1,6 +1,4 @@
-from anytree import Node, RenderTree, PreOrderIter, AsciiStyle, DoubleStyle
-from collections import defaultdict
-
+from anytree import Node, RenderTree, DoubleStyle
 
 Distance = {}
 Cities = []
@@ -9,9 +7,10 @@ minimum = 0
 
 def tree_create(current, parent, citylist):
 	_node = Node(current, parent=parent)
-	# del citylist[citylist.index(current)]
+
 	_cpcitylst = list(citylist)
 	del _cpcitylst[_cpcitylst.index(current)]
+
 	for city in _cpcitylst:
 		tree_create(city, _node, _cpcitylst)
 
@@ -20,25 +19,19 @@ def tree_iter(current, parent, distance):
 
 	if current.name in Distance and parent.name in Distance[current.name]:
 		distance += int(Distance[current.name][parent.name])
-		# print(str(distance))
 	elif parent.name in Distance and current.name in Distance[parent.name]:
 		distance += int(Distance[parent.name][current.name])
-		# print(str(distance))
 	if len(current.children) == 0:
 		minimum = min(minimum, distance)
-		# print(str(distance))
 	for child in current.children:
 		tree_iter(child, current, distance)
-		#if parent in Distance and node.name in Distance[parent]:
-
-		#if len(node.children) == 0:
-
 
 
 with open('test') as input:
-
+	## Leaving this here just to prove that I know the magic of Comprehensions
 	# _cities = [line.split()[x] for line in input for x in [0,2]]
 	# [Cities.append(y) for y in _cities if y not in Cities]
+
 	for line in input:
 		current = line.split()
 		if current[0] not in Cities:
