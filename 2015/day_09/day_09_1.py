@@ -47,7 +47,6 @@ with open('test') as input:
 				if current[x] in Distance:
 					minimum += int(current[4])
 					y = 2 if x == 0 else 0
-					# _d = {[current[y] = current[4]}
 					Distance[current[x]][current[y]] = current[4]
 
 
@@ -56,6 +55,3 @@ with open('test') as input:
 	tree_iter(root, root, 0)
 	#print(RenderTree(root, style=DoubleStyle()))
 	print(str(minimum))
-	# print(Cities)
-	# print(Distance)
-	#print(RenderTree("Root"))
