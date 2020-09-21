@@ -14,7 +14,7 @@ https://adventofcode.com/
 
 ![alt text](https://cdn.discordapp.com/attachments/432508907701665802/754261333469298728/unknown.png)
 
-- [ ] Checkpoint~~
+- [x] Checkpoint~~
 - [ ] Snake Master
 
 ## -2016- Angels we have heard on high, singing sweetly through the night..
