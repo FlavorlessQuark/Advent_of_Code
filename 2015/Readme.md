@@ -6,6 +6,8 @@ If 't be true thy mind hast hought of it, then there exists an *import*
 
 To reacheth true und'rstanding is to comprehend [Comprehensions][0]
 
+Thou shalt know that -1 is indeed a valid index...
+
 
 ## Scales to be earned:
 
