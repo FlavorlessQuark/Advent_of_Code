@@ -1,9 +1,9 @@
 from anytree import Node, RenderTree, DoubleStyle
 
-Distance = {}
-Cities = []
+Happiness = {}
+People = []
 root = Node("Root")
-minimum = 0
+maximum = 0
 
 def tree_create(current, parent, citylist):
 	_node = Node(current, parent=parent)
@@ -14,44 +14,38 @@ def tree_create(current, parent, citylist):
 	for city in _cpcitylst:
 		tree_create(city, _node, _cpcitylst)
 
-def tree_iter(current, parent, distance):
-	global minimum
+def tree_iter(current, parent, total, start):
+	global maximum
+	global Happiness
 
-	if current.name in Distance and parent.name in Distance[current.name]:
-		distance += int(Distance[current.name][parent.name])
-	elif parent.name in Distance and current.name in Distance[parent.name]:
-		distance += int(Distance[parent.name][current.name])
+	total += Happiness[current.name][parent.name]
+	total += Happiness[parent.name][current.name]
+	print(current.name + start + str (total) )
+
 	if len(current.children) == 0:
-		minimum = min(minimum, distance)
+		total += Happiness[current.name][start]
+		total += Happiness[start][current.name]
+		maximum = max(maximum, total)
+		total = 0
 	for child in current.children:
-		tree_iter(child, current, distance)
+		tree_iter(child, current, total, start)
 
 
-with open('test') as input:
-	## Leaving this here just to prove that I know the magic of Comprehensions
-	# _cities = [line.split()[x] for line in input for x in [0,2]]
-	# [Cities.append(y) for y in _cities if y not in Cities]
-
+with open('input') as input:
 	for line in input:
+		line = line[:-2]
 		current = line.split()
-		if current[0] not in Cities:
-			Cities.append(current[0])
-		if current[2] not in Cities:
-			Cities.append(current[2])
+		if current[0] not in People:
+			People.append(current[0])
 
-		if current[0] not in Distance and current[2] not in Distance:
-			Distance[current[0]] = {current[2]: current[4]}
-			minimum += int(current[4])
-		else:
-			for x in [0,2]:
-				if current[x] in Distance:
-					minimum += int(current[4])
-					y = 2 if x == 0 else 0
-					Distance[current[x]][current[y]] = current[4]
-
-
-	for city in Cities:
-		tree_create(city, root, list(Cities))
-	tree_iter(root, root, 0)
-	#print(RenderTree(root, style=DoubleStyle()))
-	print(str(minimum))
+		gain = int(current[3]) * -1 if current[2] == "lose" else int(current[3])
+		if current[0] not in Happiness:
+			Happiness[current[0]] = {}
+		Happiness[current[0]][current[10]] = gain
+for peeps in People:
+	tree_create(peeps, root, list(People))
+for node in root.children:
+	for child in node.children:
+		tree_iter(child, node, 0, node.name)
+# print(RenderTree(root, style=DoubleStyle()))
+print(str(maximum))
