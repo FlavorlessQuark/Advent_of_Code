@@ -14,29 +14,33 @@ If thou art a member of the reputable **Lazy club** then thou may use and abuse 
 
 ## Import todo
 
-	- [ ] Day01: To be redone using regex (import re)
-	- [ ] Day05: Surely this can be done with only one iteration...
-	- [ ] Day06: Did somebody say [Hash_Table, Blessed Tool of the SpeedSeeker] ?
- 	- [ ] Day08: is written more like C. More slithery thinking is required
-	- [x] Day09: There has to be a way to do this with comprehensions. But then again `Beautiful is better than ugly, and simple is better than complex`, and I'm sure the comprehension would be fairly complex and ugly
-	- [ ] Day10: Need to replace int by str for part 2 (number gets too big)
-	- [x] Day15: xrange() is faster than range()...
+- [ ] Day01: To be redone using regex (import re)
+- [ ] Day05: Surely this can be done with only one iteration...
+- [ ] Day06: Did somebody say [Hash_Table, Blessed Tool of the SpeedSeeker] ?
+- [ ] Day08: is written more like C. More slithery thinking is required
+- [x] Day09: There has to be a way to do this with comprehensions. But then again `Beautiful is better than ugly, and simple is better than complex`, and I'm sure the comprehension would be fairly complex and ugly
+- [ ] Day10: Need to replace int by str for part 2 (number gets too big)
+- [x] Day15: xrange() is faster than range()...
 
 ## From knowledge import progress_report as pr
 
-	Comprehensions are perhaps the most useful things. They allow for a one time object allocation (instead of using, for example, repeated calls to append() which reallocates the object everytime). Though they
-	must be kept relatively simple for readibility purposes...
-	I'm quite satisfied of my comprehensions so far, they are getting more complex but more straightforward.
-	Learned about enumerate, useful when making comprehensions out of file line numbers. Would be useful for Aunt Sue
+Comprehensions are perhaps the most useful things. They allow for a one time object allocation (instead of using, for example, repeated calls to append() which reallocates the object everytime). Though they must be kept relatively simple for readibility purposes...
 
-	Lambda expressions are something I have yet to utilize properly. I'm not sure why they would be used over regular functions. given that they are the same thing...
+I'm quite satisfied of my comprehensions so far, they are getting more complex but more straightforward.
+
+Learned about enumerate, useful when making comprehensions out of file line numbers. Would be useful for Aunt Sue
+
+Lambda expressions are something I have yet to utilize properly. I'm not sure why they would be used over regular functions. given that they are the same thing...
 
 ### This is Sadly only for [python3][2] :(
-	Dictionaries can be considered a set and can have anything as a key... even another dictionary
-	Just like mathematical sets, union, interesections and differences can be performed... See **[Set][1]**
-	However, I am not sure why one would use a |= b instead of a.update(b) (a and b both being dictionaries)
+Dictionaries can be considered a set and can have anything as a key... even another dictionary
 
-	Xrange is not supported on python 3
+Just like mathematical sets, union, interesections and differences can be performed... See **[Set][1]**
+
+However, I am not sure why one would use a |= b instead of a.update(b) (a and b both being dictionaries)
+
+Xrange is not supported on python 3
+
 
 
 
