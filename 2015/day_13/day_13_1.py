@@ -9,7 +9,7 @@ def tree_create(current, parent, citylist):
 	_node = Node(current, parent=parent)
 
 	_cpcitylst = list(citylist)
-	del _cpcitylst[_cpcitylst.index(current)]
+	del _cpcitylst[_cpcitylst.index(current)W]
 
 	for city in _cpcitylst:
 		tree_create(city, _node, _cpcitylst)

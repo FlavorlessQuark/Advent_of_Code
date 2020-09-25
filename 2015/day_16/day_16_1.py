@@ -25,8 +25,8 @@ with open('input') as input:
 
 		Sues[Sue_Num.findall(line)[0][:-1]] = {attr.split()[0][:-1]:int(attr.split()[1]) for attr in tmp}
 
-	# if (all(MatchMaker(attr, Sues[str(x)][attr]) for x in xrange(0, 2) for attr in  Sues[str(x)])):
-	# 	print(str(x))
+	if (all(MatchMaker(attr, Sues[str(x)][attr]) for x in xrange(0, 2) for attr in  Sues[str(x)])):
+		print(str(x))
 	for x in xrange(1, 501):
 		match = True
 		for attr in Sues[str(x)]:
