@@ -12,17 +12,24 @@ When thou discovers that *xrange* is faster than *range* for thy looping purpose
 
 If thou art a member of the reputable **Lazy club** then thou may use and abuse of *lambda*
 
+----
+
 ## Import todo
 
-- [ ] Day01: To be redone using regex (import re)
-- [ ] Day05: Surely this can be done with only one iteration...
-- [ ] Day06: Did somebody say [Hash_Table, Blessed Tool of the SpeedSeeker] ?
-- [ ] Day08: is written more like C. More slithery thinking is required
-- [x] Day09: There has to be a way to do this with comprehensions. But then again `Beautiful is better than ugly, and simple is better than complex`, and I'm sure the comprehension would be fairly complex and ugly
-- [ ] Day10: Need to replace int by str for part 2 (number gets too big)
-- [x] Day15: xrange() is faster than range()...
+- [ ] **Day01**: To be redone using regex (import re)
+- [ ] **Day05**: Surely this can be done with only one iteration...
+- [ ] **Day06**: Did somebody say [Hash_Table, Blessed Tool of the SpeedSeeker] ?
+- [ ] **Day08**: is written more like C. More slithery thinking is required
+- [x] **Day09**: There has to be a way to do this with comprehensions. But then again `Beautiful is better than ugly, and simple is better than complex`, and I'm sure the comprehension would be fairly complex and ugly
+- [ ] **Day10**: Need to replace int by str for part 2 (number gets too big)
+- [x] **Day15**: xrange() is faster than range()...
 
-- [ ] Day19: Part2 is tricky. Can't be done with a tree (probably can but would take forever) Probably need to work backwards from solution back to e, inverting key with replacement. The input has a pattern Rn..Y..Ar | Rn..Ar | or just random letters. The problem is solving it in a pythonic way...
+- [ ] **Day19**: Part2 is tricky. Can't be done with a tree (probably can but would take forever) Probably need to work backwards from solution back to e, inverting key with replacement. The input has a
+pattern Rn..Y..Ar | Rn..Ar | or just random letters. The problem is solving it in a pythonic way...
+
+- [ ] **Day20**: Trying to solve mathematically first... Checking for prime numbers might be a good solution here, though not very pythonic I feel. I might try to use lambad expressions more, or maybe I can
+find some import that returns a list of factors. Snake over speed. Optimization will come when done in C...
+---
 
 ## From knowledge import progress_report as pr
 
