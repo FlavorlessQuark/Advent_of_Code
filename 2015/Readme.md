@@ -22,6 +22,8 @@ If thou art a member of the reputable **Lazy club** then thou may use and abuse 
 - [ ] Day10: Need to replace int by str for part 2 (number gets too big)
 - [x] Day15: xrange() is faster than range()...
 
+- [ ] Day19: Part2 is tricky. Can't be done with a tree (probably can but would take forever) Probably need to work backwards from solution back to e, inverting key with replacement. The input has a pattern Rn..Y..Ar | Rn..Ar | or just random letters. The problem is solving it in a pythonic way...
+
 ## From knowledge import progress_report as pr
 
 Comprehensions are perhaps the most useful things. They allow for a one time object allocation (instead of using, for example, repeated calls to append() which reallocates the object everytime). Though they must be kept relatively simple for readibility purposes...
@@ -31,6 +33,8 @@ I'm quite satisfied of my comprehensions so far, they are getting more complex b
 Learned about enumerate, useful when making comprehensions out of file line numbers. Would be useful for Aunt Sue
 
 Lambda expressions are something I have yet to utilize properly. I'm not sure why they would be used over regular functions. given that they are the same thing...
+
+I should learn to use map(), though I have yet to find a use for it
 
 ### This is Sadly only for [python3][2] :(
 Dictionaries can be considered a set and can have anything as a key... even another dictionary
