@@ -1,14 +1,14 @@
-import math
+from __future__ import division
+import numpy as np
 
-num = 70
-total = 0
+goal = 34000000
 
-num /= 10
+houses = np.zeros(goal + 1)
 
+for num in xrange(1, goal + 1):
+	for i in xrange(0, goal + 1, num):
+		houses[i] += num
+		if houses[i] >= goal and i > 0:
+			print(i)
+			exit()
 
-# Trying to solve this mathematically first
-
-# There are a few different ways to code this and I'm not sure which to go with yet, though
-# I have a solution involving lambda expressions (which I need to learn)  in mind. It might not be the best solution
-
-print(total)
