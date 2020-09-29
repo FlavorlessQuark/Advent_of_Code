@@ -16,8 +16,6 @@ def solver(input_num):
 
 				minimum = len(comb)
 				ination += 1
-
-
 	print(str(minimum))
 
 with open('test') as input:

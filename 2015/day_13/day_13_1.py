@@ -9,7 +9,7 @@ def tree_create(current, parent, citylist):
 	_node = Node(current, parent=parent)
 
 	_cpcitylst = list(citylist)
-	del _cpcitylst[_cpcitylst.index(current)W]
+	del _cpcitylst[_cpcitylst.index(current)]
 
 	for city in _cpcitylst:
 		tree_create(city, _node, _cpcitylst)
@@ -20,7 +20,6 @@ def tree_iter(current, parent, total, start):
 
 	total += Happiness[current.name][parent.name]
 	total += Happiness[parent.name][current.name]
-	print(current.name + start + str (total) )
 
 	if len(current.children) == 0:
 		total += Happiness[current.name][start]
@@ -41,7 +40,13 @@ with open('input') as input:
 		gain = int(current[3]) * -1 if current[2] == "lose" else int(current[3])
 		if current[0] not in Happiness:
 			Happiness[current[0]] = {}
+		if "Me" not in Happiness[current[0]]:
+			Happiness[current[0]]["Me"] = 0
 		Happiness[current[0]][current[10]] = gain
+
+People.append("Me")
+Happiness['Me'] = {'Alice':0, 'Bob':0, 'Carol':0, 'David':0, 'Eric':0, 'Frank':0, 'George':0, 'Mallory':0}
+# print(People)
 for peeps in People:
 	tree_create(peeps, root, list(People))
 for node in root.children:

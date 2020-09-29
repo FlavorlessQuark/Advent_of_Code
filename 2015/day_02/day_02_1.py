@@ -1,14 +1,11 @@
-total = 0
+import re
+import itertools
 
-def parse_line(dimensions_str):
-	global total
-	dimensions = dimensions_str.split('x')
-	total += 2 * int(dimensions[0]) * int(dimensions[1])
-	total += 2 * int(dimensions[0]) * int(dimensions[2])
-	total += 2 * int(dimensions[1]) * int(dimensions[2])
-	total += min((int(dimensions[0]) * int(dimensions[1])), (int(dimensions[1]) * int(dimensions[2])), (int(dimensions[0]) * int(dimensions[2])))
+get = lambda x:
 
 with open('input') as input:
-	for line in input:
-		parse_line(line)
-print("Total: ", str(total))
+	txt = [line[:-1] for line in input]
+dicts = {e:[a for a in re.findall(r'\d*', txt[e]) if len(a) > 0] for e, stuff in  enumerate(txt)}
+
+num = [a for a in list(comb for e in dicts for comb in itertools.combinations(dicts[e], 2))]
+tot = sum(map(get,num))

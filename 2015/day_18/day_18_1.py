@@ -22,7 +22,6 @@ for i in xrange(100):
 				Buffer2[(x,y)] = 1
 			Buffer2.update(corners)
 	Buffer = deepcopy(Buffer2)
-
 num = sum(Buffer[obj] for obj in Buffer)
 
 print(str(num))

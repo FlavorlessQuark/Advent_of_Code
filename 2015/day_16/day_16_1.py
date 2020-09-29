@@ -31,7 +31,6 @@ with open('input') as input:
 		match = True
 		for attr in Sues[str(x)]:
 			if AuntSue[attr] != Sues[str(x)][attr]:
-				# print("AUnt sue " + str(AuntSue[attr]) + " Sue " + str(Sues[str(x)][attr]))
 				match = False
 		if match:
 			print(attr + str(x))

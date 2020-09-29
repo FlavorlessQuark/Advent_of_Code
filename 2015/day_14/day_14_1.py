@@ -1,9 +1,6 @@
 from __future__ import division
 
-# name = ""
-
 maximum = 0
-
 
 with open('input') as input:
 	participants = [line.split() for line in input]
