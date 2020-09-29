@@ -3,7 +3,9 @@ Christmas comes early this year
 https://adventofcode.com/
 
 ~ ~ Checkpoint at day 12 ~ ~
+
 09/28/2020 : **Achievment unlocked**: Snake Master!
+---
 
 ## [Python] -2015- Hark how the bells, sweet silver bells...
 
@@ -41,3 +43,5 @@ Feel free to give me any thoughts and tips on what I may have gotten wrong or mi
 - [ ] See a Perl form, a diamond in the rough...
 - [ ] Chekkupointo >.<
 - [ ] The world is your oyster
+
+[0]:https://github.com/FlavorlessQuark/Black_Hole/tree/master/Quarks
