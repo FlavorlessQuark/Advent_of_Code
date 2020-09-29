@@ -1,35 +1,18 @@
+import re
 import json
 
-total = 0
+def rm_red(txt):
+	if 'red' in txt:
+		return 0
+	return txt
+# total = 0
+lst = map(rm_red, (num for num in json.loads(open('input', 'r').read())))
+
 num = 0
-sign = 1
-obj = False
-ob_str = ""
+for things in lst:
+	num += sum(int(e) for e in map(int, (e for e in re.findall(r'-?\d*', str(things)) if len(e) > 0)))
+print num
 
-def str_parse():
-
-with open('input.json') as input:
-	for line in input:
-		for character in line:
-
-			if obj:
-
-			if (character == '{'):
-				obj = True
-			if (character == '{'):
-				obj = False
-
-			if (character == '-'):
-				sign = -1
-			elif character.isdigit():
-				num *= 10
-				num += int(character)
-			else:
-				total += (num  * sign)
-				sign = 1
-				num = 0
-
-print(str(total))
-
-
-
+# Could put all of this in  single expressions but :
+# 1) that's too much work for too little a reward
+# 2) Would be total gibberish

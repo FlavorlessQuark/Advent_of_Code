@@ -3,19 +3,12 @@ Christmas comes early this year
 https://adventofcode.com/
 
 ~ ~ Checkpoint at day 12 ~ ~
+09/28/2020 : **Achievment unlocked**: Snake Master!
 
-## -2015- Hark how the bells, sweet silver bells...
+## [Python] -2015- Hark how the bells, sweet silver bells...
 
-*Some Python here..*
-
-- [x] Everything is new and shiny
-
-**For the record day 6 took forever because this 990 was supposed to be 999**
-
-![alt text](https://cdn.discordapp.com/attachments/432508907701665802/754261333469298728/unknown.png)
-
-- [x] Checkpoint~~
-- [ ] Snake Master
+As I finish year 2015, I have recorded what I think is important in Python in the **[Black_Hole][0]**
+Feel free to give me any thoughts and tips on what I may have gotten wrong or missed
 
 ## -2016- Angels we have heard on high, singing sweetly through the night..
 
