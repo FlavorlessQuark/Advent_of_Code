@@ -3,7 +3,9 @@ Christmas comes early this year
 https://adventofcode.com/
 
 ~ ~ Checkpoint at day 12 ~ ~
+
 09/28/2020 : **Achievment unlocked**: Snake Master!
+---
 
 ## [Python] -2015- Hark how the bells, sweet silver bells...
 
