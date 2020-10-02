@@ -43,6 +43,3 @@ for weapon in Weapons:
 			if (boss[0] / hero_damage) >= (100 / boss_damage):
 				minimum = max(minimum, cost)
 print(minimum)
-
-
-# print(boss)

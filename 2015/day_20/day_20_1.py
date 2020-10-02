@@ -1,4 +1,4 @@
-
+import sys
 import numpy as np
 
 goal = 34000000
@@ -14,4 +14,4 @@ for num in xrange(1, goal / 10):
 for x in range(0, goal):
 	if houses[x] >= goal and x > 0:
 		print(x)
-		break
+		sys.exit(0)

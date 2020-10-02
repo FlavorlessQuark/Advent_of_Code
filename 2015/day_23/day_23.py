@@ -1,5 +1,5 @@
 registers = {
-	'a' : 1,
+	'a' : 0,
 	'b' : 0,
 	'i' : 0,
 }
@@ -60,9 +60,6 @@ maximum = len(instructions)
 
 while registers['i'] >= 0 and registers['i'] < maximum:
 	operations[instructions[registers['i']][0]]()
-
-
-
 
 print(registers)
 
