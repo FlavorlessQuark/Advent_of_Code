@@ -14,34 +14,16 @@ Feel free to give me any thoughts and tips on what I may have gotten wrong or mi
 
 ## -2016- Angels we have heard on high, singing sweetly through the night..
 
-*Some Java there..*
-
-- [ ] Time to dance
-- [ ] | Point de control |
-- [ ] King of the dance halls
+C
 
 ## -2017- I'm dreaming of a white Christmas..
 
-*Add a hint of Go*
-
-- [ ] Let's GO
-- [ ] Geommunso \o/
-- [ ] Fast AND furious
-
+C++
 ## -2018- Silent night! Holy night! All is calm, all is bright...
-
-*And a pinch of Rust*
-
-- [ ] Shaked off the Rust
-- [ ] ~ Jiancha Zhan ~
-- [ ] Antioxidant
+ASM
 
 ## -2019- On the first day of Christmas, my true love gave to me...
 
-*Maybe a little bit of Perl*
-
-- [ ] See a Perl form, a diamond in the rough...
-- [ ] Chekkupointo >.<
-- [ ] The world is your oyster
+C
 
 [0]:https://github.com/FlavorlessQuark/Black_Hole/tree/master/Quarks
