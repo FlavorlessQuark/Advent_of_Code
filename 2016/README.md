@@ -5,16 +5,16 @@
 Windows files have CRLF file endings and must be converted via `dos2unix [filename]`
 Else some surprises may occur while parsing.
 
-The python has
+Interestingly after learning python, I look at file parsing differently >.<
 
 Need to Update aoc.h:
 
 Fetch by word by line ();
-	array of lists: Pros : easy to iterate. Only one call to malloc
-					Cons : Need to know line count beforehand... Potentially would have to read file twice. Not very good for large files.
+|               | Pros          	  | Cons  |
+| ------------- |:-------------:	  | -----:|
+| Array of list |easy to iterate **/** Only one call to malloc |Need to know line count beforehand **/** Potential need to read file twice **/** Not good for large files|
+| Lists of list |Only one file read is enough |A pain to iterate through **/** Multiple calls to malloc **/** More pointers than I'd like|
 
-	lists of list : Pros : Only one file read is enough;
-					Cons : A pain to iterate through; Multiple calls to malloc. More pointers than I'd like.
 
 **Need to check something about unallocated memory**
 
