@@ -6,14 +6,16 @@
 # include <sys/types.h>
 # include <limits.h>
 # include <string.h>
+# include <assert.h>
+# include <stddef.h>
 
 // #include <regex.h> Not sure where this file is or where to get it.
 // I suspect that it is simply not available on WSL, but I would need to check on a VM
 // In the meantime I will do without
 
-# define ABC_U "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# define ABC_L "abcdefghijklmnopqrstuvwxyz"
-
+# define ABC_U	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define ABC_L	"abcdefghijklmnopqrstuvwxyz"
+# define NUMS	"0123456789-+"
 // Structs here
 
 struct list;
@@ -39,6 +41,15 @@ typedef struct
 	int y;
 }			_V2;
 
+// Misc
+# define MAX(x, y)\
+	({__typeof__ (x) _x} = (x);\
+	({__typeof__ (y) _y} = (y);\
+	_x < _y ? _y : _x;})
+
+char *join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
+
+int count(char *str, char c){ int count = 0; while (str++) {count += (*str == c) ? 1 : 0;}}
 // List functions
 
 
@@ -46,7 +57,6 @@ node *new_node() {node *node; node = calloc(1, sizeof(node)); return node;}
 
 // Parsing functions
 
-int count(char *str, char c){ int count = 0; while (str++) {count += (*str == c) ? 1 : 0;}}
 
 node *get_words(char  *str, char *delimeters, int *len)
 {
