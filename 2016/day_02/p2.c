@@ -51,7 +51,7 @@ int main()
 			}
 			n++;
 		}
-			printf("%c\n", keypad[pos.y][pos.x]);
+		printf("%c\n", keypad[pos.y][pos.x]);
 		input = input->next;
 	}
 }

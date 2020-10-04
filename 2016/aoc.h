@@ -11,6 +11,9 @@
 // I suspect that it is simply not available on WSL, but I would need to check on a VM
 // In the meantime I will do without
 
+# define ABC_U "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define ABC_L "abcdefghijklmnopqrstuvwxyz"
+
 // Structs here
 
 struct list;
@@ -38,8 +41,33 @@ typedef struct
 
 // List functions
 
-node *new_node() { node *node; node = calloc(1, sizeof(node)); return node;}
 
+node *new_node() {node *node; node = calloc(1, sizeof(node)); return node;}
+
+// Parsing functions
+
+int count(char *str, char c){ int count = 0; while (str++) {count += (*str == c) ? 1 : 0;}}
+
+node *get_words(char  *str, char *delimeters, int *len)
+{
+	node *list;
+	node *head;
+
+	head = calloc(1, sizeof(node));
+	list = head;
+
+	str = strtok(str, delimeters);
+	while (str != NULL)
+	{
+		*len++;
+		list->data = (void *)str;
+		list->next = new_node();
+		list->next->prev = list;
+		list = list->next;
+		str = strtok(NULL, delimeters);
+	}
+	list->next = NULL;
+}
 
 // Reads file into _File struct.
 
@@ -69,28 +97,24 @@ node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
 {
 	_File	data;
 	node	*list;
-	node	*head;
 	char	*str;
 
-	data = fetch_file(filename, trim);
 	*len = 0;
+	data = fetch_file(filename, trim);
 
-	head = calloc(1, sizeof(node));
-	list = head;
+	list = get_words(((char *)data.content), delimeters, len);
 
-	str = strtok((char *)data.content, delimeters);
-	while (str != NULL)
-	{
-		*len++;
-		list->data = (void *)str;
-		list->next = new_node();
-		list->next->prev = list;
-		list = list->next;
-		str = strtok(NULL, delimeters);
-	}
-	list->next = NULL;
-	return head;
+	return list;
 }
 
+
+// void	fetch_by_grid(char *filename, char *delimiter, int trim)
+// {
+// 	_File file;
+// 	int len;
+
+// 	file = fetch_by_word(filename, delimiter, )
+
+// }
 
 #endif
