@@ -8,6 +8,7 @@
 # include <string.h>
 # include <assert.h>
 # include <stddef.h>
+# include <math.h>
 
 // #include <regex.h> Not sure where this file is or where to get it.
 // I suspect that it is simply not available on WSL, but I would need to check on a VM
@@ -28,14 +29,14 @@ typedef struct	list
 	node *next;
 }				node;
 
-typedef struct
+typedef struct	data
 {
 	long filesize;
 
 	char *content;
 }				_File;
 
-typedef struct
+typedef struct	vect
 {
 	int x;
 	int y;
@@ -49,7 +50,9 @@ typedef struct
 
 char *join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
 
-int count(char *str, char c){ int count = 0; while (str++) {count += (*str == c) ? 1 : 0;}}
+int count(char *str, char c){ int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
+
+int numlen(int num){int len; if (num == 0) {return 1;}len = floor(log10(abs(num))) + 1; return (num < 0) ? (len + 1) : (len);}
 // List functions
 
 
@@ -69,7 +72,7 @@ node *get_words(char  *str, char *delimeters, int *len)
 	str = strtok(str, delimeters);
 	while (str != NULL)
 	{
-		*len++;
+		*len += 1;
 		list->data = (void *)str;
 		list->next = new_node();
 		list->next->prev = list;
@@ -77,6 +80,7 @@ node *get_words(char  *str, char *delimeters, int *len)
 		str = strtok(NULL, delimeters);
 	}
 	list->next = NULL;
+	return head;
 }
 
 // Reads file into _File struct.
@@ -88,7 +92,6 @@ _File fetch_file(char *filename, int trim)
 
 	file = fopen(filename, "r");
 	fseek(file, 0L , SEEK_END);
-	// printf("good here \n");
 
 	data.filesize = ftell(file);
 	data.content = calloc(data.filesize + 1, 1);
