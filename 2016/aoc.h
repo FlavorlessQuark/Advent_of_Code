@@ -9,6 +9,7 @@
 # include <assert.h>
 # include <stddef.h>
 # include <math.h>
+# include <ctype.h>
 
 // #include <regex.h> Not sure where this file is or where to get it.
 // I suspect that it is simply not available on WSL, but I would need to check on a VM
@@ -50,12 +51,14 @@ typedef struct	vect
 
 char *join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
 
-int count(char *str, char c){ int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
+int count(char *str, char c){int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
 
-int numlen(int num){int len; if (num == 0) {return 1;}len = floor(log10(abs(num))) + 1; return (num < 0) ? (len + 1) : (len);}
+int numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
+
+char *itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,"%d", number); return str;}
+//Not very efficient but works for current purposes
+
 // List functions
-
-
 node *new_node() {node *node; node = calloc(1, sizeof(node)); return node;}
 
 // Parsing functions
