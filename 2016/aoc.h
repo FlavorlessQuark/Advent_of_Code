@@ -25,7 +25,7 @@ typedef struct list node;
 
 typedef struct	list
 {
-	void *data; // Conversion to char * does not seem to work. atoi() considers this a void * even when cast to char *
+	char *data; // Conversion to char * does not seem to work. atoi() considers this a void * even when cast to char *
 	node *prev;
 	node *next;
 }				node;
@@ -69,18 +69,18 @@ node *get_words(char  *str, char *delimeters, int *len)
 	node *list;
 	node *head;
 
-	head = calloc(1, sizeof(node));
+	head = new_node();
 	list = head;
 
 	str = strtok(str, delimeters);
 	while (str != NULL)
 	{
 		*len += 1;
-		list->data = (void *)str;
-		list->next = new_node();
-		list->next->prev = list;
-		list = list->next;
+		list->data = join("",str);
 		str = strtok(NULL, delimeters);
+		printf("word %s %p\n", list->data, list);
+		list->next = new_node();
+		list = list->next;
 	}
 	list->next = NULL;
 	return head;
