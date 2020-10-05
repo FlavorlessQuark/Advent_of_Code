@@ -73,6 +73,10 @@ int main()
 	printf("word %p\n", list);
 	list = list->next;
 	printf("word %p\n", list);
+	//Segfaults here
+	// Adress is incomplete once printed... Why? I don't have a single clue...
+	// Fsanitize says it's in newnode() but I'm not doing anything fishy over there
+
 	// while (list->next != NULL)
 	// {
 		// printf("word %s %p\n", (char *)list->data, list->next);
