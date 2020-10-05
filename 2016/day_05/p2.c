@@ -30,20 +30,32 @@ int main()
 	CC_MD5_CTX context;
 
 
-	input = join("", "abc");
+	input = join("", "abbhdwsy");
 	encode = calloc(32, 1);
 	count = 0;
 	CC_MD5(input, strlen(input), result);
 	format_hash(result, encode);
 
+	pass[0] = '-';
+	pass[1] = '-';
+	pass[2] = '-';
+	pass[3] = '-';
+	pass[4] = '-';
+	pass[5] = '-';
+	pass[6] = '-';
+	pass[7] = '-';
+
 	while (1)
 	{
 		i = strspn(encode, "0");
-		if (i == 5)
+		if (i >= 5)
 		{
-			printf("encode %s %s\n", encode, tmp);
-			pass[found] = encode[5];
-			found++;
+			if (isdigit(encode[5]) && encode[5] - 48 < 8 && pass[encode[5] - 48] == '-')
+			{
+				printf("encode %s %d\n", encode, count);
+				pass[encode[5] - 48] = encode[6];
+				found++;
+			}
 		}
 		if (found == 8)
 			break ;
