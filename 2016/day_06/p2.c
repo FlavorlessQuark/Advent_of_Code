@@ -45,7 +45,7 @@ int main()
 		i = 0;
 		while (i < 26)
 		{
-			(letters[columns][i] > letters[columns][max]) ? (max = i) : (max +=0);
+			(letters[columns][i] > letters[columns][max]) ? (max += 0) : (max = i);
 			i++;
 		}
 		final[columns] = (char)(max + 97);
