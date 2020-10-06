@@ -25,9 +25,8 @@ typedef struct list node;
 
 typedef struct	list
 {
-	char *data; // Conversion to char * does not seem to work. atoi() considers this a void * even when cast to char *
-	node *prev;
 	node *next;
+	void *data; // Conversion to char * does not seem to work. atoi() considers this a void * even when cast to char *
 }				node;
 
 typedef struct	data
@@ -59,7 +58,9 @@ char *itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,
 //Not very efficient but works for current purposes
 
 // List functions
-node *new_node() {node *node; node = calloc(1, sizeof(node)); return node;}
+
+//Returns a new node;
+node *new_node() {node *node; node = malloc(1 * sizeof(node)); return node;}
 
 // Parsing functions
 
@@ -76,9 +77,8 @@ node *get_words(char  *str, char *delimeters, int *len)
 	while (str != NULL)
 	{
 		*len += 1;
-		list->data = join("",str);
+		list->data = (void  *)str;
 		str = strtok(NULL, delimeters);
-		printf("word %s %p\n", list->data, list);
 		list->next = new_node();
 		list = list->next;
 	}
