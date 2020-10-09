@@ -21,3 +21,5 @@ Fetch by word by line ();
 *If a list pointer *lst has an adress 0x000001 , is it valid to have another pointer *lst1 such that *lst1 = lst + sizeof(lst)?*
 *Would 0x000009 be a valid adress ? Or does it need to be allocated?*
 *I have to test this in the void_sandbox but I think it will either result in segfault or memory corruption over time...*
+
+**Look into len and log**
