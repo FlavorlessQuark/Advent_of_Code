@@ -61,14 +61,15 @@ int main()
 	_File file;
 	int total;
 	// char *str;
-	node *list;
-	node *head;
+	_Node *list;
+	_Node *head;
 
+	total = 0;
 	file = fetch_file("test", 1);
-	list = get_words((char *)file.content, "[,],\n", &total);
+	list = get_words(file.content, "[,],\n", &total);
 
 	// Note to self for the inevitabe day when I have to fix this :
-	
+
 	// Adress of (some nodes of)list was incomplete once printed... Why? I don't have a single clue...
 	// ""Fix""" was to move the void * in node struct below node *, and I said fix with a lot of air quotes
 	// Doesn't segfault anymore but memory leak still, will probably lead to corrupted memory down the line..
@@ -77,7 +78,7 @@ int main()
 
 	while (list->next != NULL)
 	{
-		printf("word %s\n" , (char *)list->data, list->next);
+		//printf("word %s\n" , (char *)list->data);
 		list = list->next;
 	}
 	// str = strtok(file.content, "\n");
