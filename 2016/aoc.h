@@ -17,17 +17,16 @@
 
 # define ABC_U	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define ABC_L	"abcdefghijklmnopqrstuvwxyz"
-# define NUMS	"0123456789-+"
+# define MATHC	"()x*"
+# define NUMS	"0123456789"
+# define NMATHC	"0123456789-+()x*=/ "
 // Structs here
 
-struct list;
-typedef struct list node;
-
-typedef struct	list
+typedef struct	s_list
 {
-	node *next;
+	struct s_list *next;
 	void *data; // Conversion to char * does not seem to work. atoi() considers this a void * even when cast to char *
-}				node;
+}				_Node;
 
 typedef struct	data
 {
@@ -48,27 +47,29 @@ typedef struct	vect
 	({__typeof__ (y) _y} = (y);\
 	_x < _y ? _y : _x;})
 
-char *join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
+char	*join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
 
-int count(char *str, char c){int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
+int		count(char *str, char c){int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
 
-int numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
+int		numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
 
-char *itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,"%d", number); return str;}
+char	*itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,"%d", number); return str;}
+
+int		extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
 //Not very efficient but works for current purposes
 
 // List functions
 
 //Returns a new node;
-node *new_node() {node *node; node = malloc(1 * sizeof(node)); return node;}
+_Node *new_node() {_Node *node; node = malloc(1 * sizeof(_Node)); return node;}
 
 // Parsing functions
 
 
-node *get_words(char  *str, char *delimeters, int *len)
+_Node *get_words(char  *str, char *delimeters, int *len)
 {
-	node *list;
-	node *head;
+	_Node *list;
+	_Node *head;
 
 	head = new_node();
 	list = head;
@@ -77,7 +78,7 @@ node *get_words(char  *str, char *delimeters, int *len)
 	while (str != NULL)
 	{
 		*len += 1;
-		list->data = (void  *)str;
+		list->data = (void *)str;
 		str = strtok(NULL, delimeters);
 		list->next = new_node();
 		list = list->next;
@@ -109,16 +110,16 @@ _File fetch_file(char *filename, int trim)
 // Need to use an int trim if the input has unwanted newlines... Though it might not be necessary
 // int *len needed to retrive the number of words without having to traverse the list
 
-node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
+_Node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
 {
 	_File	data;
-	node	*list;
+	_Node	*list;
 	char	*str;
 
 	*len = 0;
 	data = fetch_file(filename, trim);
 
-	list = get_words(((char *)data.content), delimeters, len);
+	list = get_words(data.content, delimeters, len);
 
 	return list;
 }
