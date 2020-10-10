@@ -1,6 +1,7 @@
 #ifndef AOC_H
 # define AOC_H
 
+# include <CommonCrypto/CommonDigest.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -65,8 +66,8 @@ _Node *new_node() {_Node *node; node = malloc(1 * sizeof(_Node)); return node;}
 
 // Parsing functions
 
-
-_Node *get_words(char  *str, char *delimeters, int *len)
+// Returns a list of words from str, separated by delimiters
+_Node *fetch_words(char  *str, char *delimeters, int *len)
 {
 	_Node *list;
 	_Node *head;
@@ -87,8 +88,8 @@ _Node *get_words(char  *str, char *delimeters, int *len)
 	return head;
 }
 
-// Reads file into _File struct.
 
+// Reads file into _File struct.
 _File fetch_file(char *filename, int trim)
 {
 	FILE	*file;
@@ -106,10 +107,10 @@ _File fetch_file(char *filename, int trim)
 	return data;
 }
 
-// Reads input file into a list of words. Words are sperated by *delimeter
 // Need to use an int trim if the input has unwanted newlines... Though it might not be necessary
 // int *len needed to retrive the number of words without having to traverse the list
 
+// Reads input file into a list of words. Words are sperated by *delimeter
 _Node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
 {
 	_File	data;
@@ -119,12 +120,34 @@ _Node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
 	*len = 0;
 	data = fetch_file(filename, trim);
 
-	list = get_words(data.content, delimeters, len);
+	list = fetch_words(data.content, delimeters, len);
 
 	return list;
 }
 
+void format_hash(unsigned char hash[16], char *final)
+{
+	int n = 0;
+	char str[3];
 
+	for (size_t i = 0; i < 16; ++i)
+	{
+		sprintf(str,"%.2x", hash[i]);
+		final[n] = str[0];
+		n++;
+		final[n] = str[1];
+		n++;
+	}
+}
+
+void get_new_hash(char *input, char *hash)
+{
+	char *tmp;
+	unsigned char result[CC_MD5_DIGEST_LENGTH];
+
+	CC_MD5(tmp, strlen(tmp), result);
+	format_hash(result, hash);
+}
 // void	fetch_by_grid(char *filename, char *delimiter, int trim)
 // {
 // 	_File file;
