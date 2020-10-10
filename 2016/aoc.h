@@ -142,10 +142,9 @@ void format_hash(unsigned char hash[16], char *final)
 
 void get_new_hash(char *input, char *hash)
 {
-	char *tmp;
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
 
-	CC_MD5(tmp, strlen(tmp), result);
+	CC_MD5(input, strlen(input), result);
 	format_hash(result, hash);
 }
 // void	fetch_by_grid(char *filename, char *delimiter, int trim)
