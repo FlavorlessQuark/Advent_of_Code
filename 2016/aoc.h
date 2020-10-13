@@ -42,11 +42,17 @@ typedef struct	vect
 	int y;
 }			_V2;
 
-// Misc
+/////------------ Macros ------------\\\\\
+
 # define MAX(x, y)\
 	({__typeof__ (x) _x} = (x);\
 	({__typeof__ (y) _y} = (y);\
 	_x < _y ? _y : _x;})
+
+# define MIN(x, y)\
+	({__typeof__ (x) _x} = (x);\
+	({__typeof__ (y) _y} = (y);\
+	_x > _y ? _y : _x;})
 
 char	*join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
 
@@ -59,12 +65,85 @@ char	*itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,
 int		extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
 //Not very efficient but works for current purposes
 
-// List functions
+/////------------ Sorting algorithms ------------\\\\\
+
+//Merge two sorted lists.
+_Node *_lstSort(_Node *h1, _Node *h2)
+{
+	_Node head;
+	_Node *list;
+
+	list = &head;
+	list->next = NULL;
+	while (1)
+	{
+		if(h1 == NULL)
+		{
+			list->next = h2;
+			break ;
+		}
+		if (h2 == NULL)
+		{
+			list->next = h1;
+			break ;
+		}
+		if (atol(h1->data) <= atol(h2->data))
+		{
+			list->next = h1;
+			h1 = h1->next;
+		}
+		else
+		{
+			list->next = h2;
+			h2 = h2->next;
+		}
+		list = list->next;
+	}
+	return head.next;
+}
+
+//List Merge Sort
+_Node *lstMsort(_Node *head, int len)
+{
+	_Node *h1;
+	_Node *h2;
+	int i;
+
+	h1 = head;
+	i = 0;
+	if (len > 2)
+	{
+		while (h1->next != NULL && i < (len / 2) - 1)
+		{
+			h1 = h1->next;
+			i++;
+		}
+		h2 = h1->next;
+		h1->next = NULL;
+		h1 = head;
+
+		h1 = lstMsort(h1,(len / 2));
+		h2 = lstMsort(h2, (len / 2));
+		head = _lstSort(h1, h2);
+	}
+	return head;
+}
+
+/////------------ List functions ------------\\\\\
 
 //Returns a new node;
-_Node *new_node() {_Node *node; node = malloc(1 * sizeof(_Node)); return node;}
+_Node *new_node() {_Node *node; node = calloc(1 , sizeof(_Node)); return node;}
 
-// Parsing functions
+void _printlst(_Node *lst)
+{
+	while (lst != NULL)
+	{
+		printf("%s\n", lst->data);
+		lst = lst->next;
+	}
+}
+
+/////------------ Parsing functions ------------\\\\\
 
 // Returns a list of words from str, separated by delimiters
 _Node *fetch_words(char  *str, char *delimeters, int *len)
@@ -76,11 +155,13 @@ _Node *fetch_words(char  *str, char *delimeters, int *len)
 	list = head;
 
 	str = strtok(str, delimeters);
-	while (str != NULL)
+	while (1)
 	{
 		*len += 1;
 		list->data = (void *)str;
 		str = strtok(NULL, delimeters);
+		if (str == NULL)
+			break ;
 		list->next = new_node();
 		list = list->next;
 	}
@@ -107,9 +188,6 @@ _File fetch_file(char *filename, int trim)
 	return data;
 }
 
-// Need to use an int trim if the input has unwanted newlines... Though it might not be necessary
-// int *len needed to retrive the number of words without having to traverse the list
-
 // Reads input file into a list of words. Words are sperated by *delimeter
 _Node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
 {
@@ -124,6 +202,8 @@ _Node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
 
 	return list;
 }
+
+/////------------ MD5 functions ------------\\\\\
 
 void format_hash(unsigned char hash[16], char *final)
 {
