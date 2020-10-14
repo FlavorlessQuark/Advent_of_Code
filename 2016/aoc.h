@@ -31,7 +31,7 @@ typedef struct	s_list
 
 typedef struct	data
 {
-	long filesize;
+	size_t filesize;
 
 	char *content;
 }				_File;
@@ -54,9 +54,7 @@ typedef struct	vect
 	({__typeof__ (y) _y} = (y);\
 	_x > _y ? _y : _x;})
 
-char	*join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
-
-int		count(char *str, char c){int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
+/////------------ Numbers functions------------\\\\\
 
 int		numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
 
@@ -64,6 +62,36 @@ char	*itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,
 
 int		extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
 //Not very efficient but works for current purposes
+
+/////------------ String functions ------------\\\\\
+
+//Joins two strings together
+char	*join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
+
+//Counts occurences of a char within a string
+int		count(char *str, char c){int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
+
+//Rotates string left (negative shift) or right (positive shift)
+void strshift(int shift, char *str)
+{
+	char last;
+	size_t i,len;
+	int step;
+
+	step = (shift >= 0) ? 1 : -1;
+	len =
+	while (shift != 0)
+	{
+		(step == 1) ? (last = str[len - 1], i = len - 2) : (last = str[0], i = 1);
+		while (i >= 0 && i <= len)
+		{
+			str[i + step] = str[i];
+			i -= step;
+		}
+		shift--;
+	}
+	(step == 1) ? (str[0] = last) : (str[len - 1] = last);
+}
 
 /////------------ Sorting algorithms ------------\\\\\
 
@@ -146,7 +174,7 @@ void _printlst(_Node *lst)
 /////------------ Parsing functions ------------\\\\\
 
 // Returns a list of words from str, separated by delimiters
-_Node *fetch_words(char  *str, char *delimeters, int *len)
+_Node *fetch_words(char  *str, char *delimeters, size_t *len)
 {
 	_Node *list;
 	_Node *head;
@@ -189,7 +217,7 @@ _File fetch_file(char *filename, int trim)
 }
 
 // Reads input file into a list of words. Words are sperated by *delimeter
-_Node *fetch_by_word(char *filename, char *delimeters, int trim, int *len)
+_Node *fetch_by_word(char *filename, char *delimeters, int trim, size_t *len)
 {
 	_File	data;
 	_Node	*list;
