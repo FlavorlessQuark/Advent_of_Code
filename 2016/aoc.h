@@ -79,7 +79,6 @@ void strshift(int shift, char *str)
 	int step;
 
 	step = (shift >= 0) ? 1 : -1;
-	len =
 	while (shift != 0)
 	{
 		(step == 1) ? (last = str[len - 1], i = len - 2) : (last = str[0], i = 1);
@@ -139,7 +138,7 @@ _Node *lstMsort(_Node *head, int len)
 
 	h1 = head;
 	i = 0;
-	if (len > 2)
+	if (len >= 2)
 	{
 		while (h1->next != NULL && i < (len / 2) - 1)
 		{
