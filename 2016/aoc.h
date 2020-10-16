@@ -66,10 +66,17 @@ int		extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number 
 /////------------ String functions ------------\\\\\
 
 //Joins two strings together
-char	*join(char *s1, char *s2){ char* str = malloc(strlen(s1) + strlen(s2) + 1); return strcat(strcpy(str, s1), s2);}
+char	*join(char *s1, char *s2)
+{
+	size_t len = strlen(s1) + strlen(s2) + 1;
+	char* str;
+	str = calloc(len, 1);
+	snprintf(str, len,  "%s%s", s1,s2);
+	return str;
+}
 
 //Counts occurences of a char within a string
-int		count(char *str, char c){int count = 0; while (str++) {count += (*str == c) ? 1 : 0;} return count;}
+int		count(char *str, char c){int count = 0; while (*str++) {count += (*str == c) ? 1 : 0;} return count;}
 
 //Rotates string left (negative shift) or right (positive shift)
 void strshift(int shift, char *str)
