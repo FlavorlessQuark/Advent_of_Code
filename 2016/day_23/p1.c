@@ -26,17 +26,6 @@ int main()
 	i = 0;
 	while (i < len && i >= 0)
 	{
-		// int n = 0;
-		// printf("\n----  %d -----\n", i);
-		// printf("a : %d, b: %d c: %d d: %d\n", a, b, c, d);
-		// while (n < len)
-		// {
-		// //	printf("Instruction : %s", str[n]);
-		// 	if (n == i)
-		// 		printf(" <");
-		// 	printf("\n");
-		// 	n++;
-		// }
 		if (str[i][0] == 'c')
 		{
 			(isdigit(str[i][4]) || isdigit(str[i][5])) ? (val = atoi(str[i] + 4)) : ((str[i][4] == 'a') ? (val = a) : ((str[i][4] == 'b') ? (val = b) : ((str[i][4] == 'c') ? (val = c) : (val = d))));
@@ -47,7 +36,6 @@ int main()
 		{
 			reg = strrchr(str[i], ' ')[1];
 			(isdigit(str[i][strlen(str[i]) - 1])) ? (val = atoi(strrchr(str[i], ' '))) : ((reg == 'a') ? (val = a) : ((reg == 'b') ? (val = b) : ((reg == 'c') ? (val = c) : (val = d))));
-			//printf("\n jnz : val %d char %c\n", val, reg);
 			if (val == 0)
 				val = 1;
 			if (isdigit(str[i][4]))

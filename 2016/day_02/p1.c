@@ -2,9 +2,8 @@
 
 int main()
 {
-	node	*input;
+	_Node	*input;
 	int 	len;
-	int 	start;
 	int 	pos;
 	int 	n;
 

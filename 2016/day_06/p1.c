@@ -3,35 +3,31 @@
 
 int main()
 {
-	_File file;
-	int columns = 8, i, max;
-	char *str, *final;
-	int letters[8][26];
+	_File	file;
+	int		columns;
+	int		i;
+	int		max;
 
-	file = fetch_file("input", 1);
-
-	str = strtok((char *)(file.content), "\n");
+	int		*letters[8];
+	char	*str;
+	char	*final;
 
 	i = 0;
+	file = fetch_file("input", 1);
+	str = strtok((char *)(file.content), "\n");
+
+	columns = 8;
 	while (i < columns)
 	{
-		max = 0;
-		while (max < 26)
-		{
-			letters[i][max] = 0;
-			max++;
-		}
+		letters[i] = calloc(sizeof(int), 26);
 		i++;
 	}
-
-	max = 0;
 	while (str != NULL)
 	{
 		i = 0;
 		while (i < columns)
 		{
-			letters[i][(((int)str[i]) - 97)] = letters[i][(((int)str[i]) - 97)] += 1;
-			// printf("Max %c %d  %d\n", str[i], letters[i][(((int)str[i]) - 97)], (((int)str[i]) - 97));
+			letters[i][((int)str[i]) - 97] += 1;
 			i++;
 		}
 		str = strtok(NULL, "\n");
@@ -41,8 +37,8 @@ int main()
 	columns--;
 	while (columns >= 0)
 	{
-		max = 0;
 		i = 0;
+		max = 0;
 		while (i < 26)
 		{
 			(letters[columns][i] > letters[columns][max]) ? (max = i) : (max +=0);

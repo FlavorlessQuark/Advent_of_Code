@@ -3,27 +3,19 @@
 
 int main()
 {
-	_File input;
+	_Node *input;
 	int total;
 	int x, y, z;
 	int i;
-	char *str;
 
-	i = 1913;
 	total = 0;
-	input = fetch_file("input", 1);
-
-	x = atoi(str = strtok((char *)input.content, " "));
-	y = atoi(str = strtok(NULL, " "));
-	z =  atoi(str = strtok(NULL, " \n"));
-	((x + z) > y && (y + z) > x && (x + y) > z) ? (total += 1) : (NULL);
-	
-	while (i-- > 0) // Checking if str == NULL fails. I must be misunderstanding strtok
+	input = fetch_by_word("input", "\n",1, &i);
+	while (input != NULL)
 	{
-		x = atoi(str = strtok(NULL, " "));
-		y = atoi(str = strtok(NULL, " "));
-		z =  atoi(str = strtok(NULL, " \n"));
+		input->data += extract_num(input->data, &x);
+		input->data += extract_num(input->data, &y);
+		extract_num(input->data, &z);
 		((x + z) > y && (y + z) > x && (x + y) > z) ? (total += 1) : (NULL);
 	}
-	printf("%d %s\n", total, str);
+	printf("%d\n", total);
 }

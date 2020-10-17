@@ -150,11 +150,8 @@ int main()
 	{
 		if (size->data > 0 )
 		{
-			if (size->pos.x != available->pos.x || size->pos.y != available->pos.y)
-			{
-				available = gcount(available, size,&len);
-				pairs += len;
-			}
+			available = gcount(available, size,&len);
+			pairs += len;
 		}
 		size = size->next;
 	}

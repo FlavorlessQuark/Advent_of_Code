@@ -2,7 +2,7 @@
 
 int main()
 {
-	node 	*input;
+	_Node 	*input;
 	_V2		pos;
 
 	int 	len;

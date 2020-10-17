@@ -231,9 +231,7 @@ _Node *fetch_by_word(char *filename, char *delimeters, int trim, size_t *len)
 
 	*len = 0;
 	data = fetch_file(filename, trim);
-
 	list = fetch_words(data.content, delimeters, len);
-
 	return list;
 }
 
@@ -261,13 +259,5 @@ void get_new_hash(char *input, char *hash)
 	CC_MD5(input, strlen(input), result);
 	format_hash(result, hash);
 }
-// void	fetch_by_grid(char *filename, char *delimiter, int trim)
-// {
-// 	_File file;
-// 	int len;
-
-// 	file = fetch_by_word(filename, delimiter, )
-
-// }
 
 #endif
