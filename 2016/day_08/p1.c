@@ -88,7 +88,6 @@ int main()
 	file = fetch_file("input", 1);
 
 	grid = malloc(sizeof(char *)  * 6);
-
 	len = 0;
 	while (len < 6)
 	{
@@ -96,10 +95,6 @@ int main()
 		memset(grid[len], '.', 50);
 		len++;
 	}
-
-	// rect(1,2, grid);
-	// print(grid);
-
 	str = strtok((char *)file.content, "\n");
 
 	int n  = 0;
@@ -118,10 +113,4 @@ int main()
 		n++;
 	}
 	print(grid);
-	// printf("len %lu\n", strspn(str, ABC_L));
-
-	// printf("%s\n", str[0]);
-	// printf("%s\n", str[1]);
-	// printf("%s\n", str[2]);
-
 }

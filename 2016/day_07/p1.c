@@ -28,31 +28,22 @@ int calc_chunk(char *str)
 	int len;
 	int eval;
 	int chunk;
+
+	len = 1;
 	eval = 0;
-
 	chunk = 0;
-	while (len != 0)
+	while ((len = strspn(str,ABC_L)) != 0)
 	{
-		len = strspn(str,ABC_L);
-
 		chunk++;
-		if (eval_chunk(str, len))
-			eval = 1;
+		if ((eval = eval_chunk(str, len)) && chunk %  2== 0)
+			return 0;
 		if (len == strlen(str))
 			return eval;
-		str += len + 1;
-
-		chunk++;
-		len = strspn(str,ABC_L);
-
-		if (eval_chunk(str, len))
-			return 0;
 		str += len + 1;
 	}
 	chunk++;
 	len = strlen(str);
-	if (eval_chunk(str, len))
-		eval = 1;
+	eval = eval_chunk(str, len);
 	return eval;
 }
 

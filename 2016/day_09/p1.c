@@ -8,9 +8,9 @@ int main()
 	int		total;
 	int		dup;
 
+	i = 0;
 	total = 0;
 	file = fetch_file("input", 1);
-	i = 0;
 	while (file.content[i] != '\0')
 	{
 		if (file.content[i] == '(')
@@ -19,7 +19,7 @@ int main()
 			i += strcspn(file.content + i, ")") + atoi(file.content + i + 1);
 			total += dup;
 		}
-		else if (file.content[i] != ' ')
+		else
 			total++;
 		i++;
 	}

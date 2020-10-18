@@ -42,18 +42,6 @@ void move(char *str, int start, int end)
 	str[end] = save;
 }
 
-char *strrev(char *str, int start, int end)
-{
-
-	while (start < end)
-	{
-		swapi(&str[start], &str[end]);
-		start++;
-		end--;
-	}
-	return str;
-}
-
 int main()
 {
 	char *input;
@@ -92,10 +80,7 @@ int main()
 			}
 		}
 		else
-		{
 			move(input, atoi(operations->data + 14), atoi(strrchr(operations->data, ' ')));
-		}
-
 		printf("Line %d : %s\n", i, input);
 		i++;
 		operations = operations->next;

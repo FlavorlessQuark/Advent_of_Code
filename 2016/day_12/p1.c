@@ -1,11 +1,5 @@
 #include "../aoc.h"
 
-//Refactor note;
-
-// Not really efficient. Twice as much memory as should be used
-// Might need to add a "fetch_by_array"  and "fetch_by_list"
-
-
 int main()
 {
 	int a,b,c,d, len, i, val;

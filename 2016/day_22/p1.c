@@ -57,7 +57,6 @@ _Grid *gridSort(_Grid *h1, _Grid *h2)
 	return head.next;
 }
 
-//List Merge Sort
 _Grid *gridMsort(_Grid *head, int len)
 {
 	_Grid *h1;
@@ -131,7 +130,6 @@ int main()
 		size->data = data;
 
 		nodes->data += extract_num(nodes->data, &data);
-		//printf("Size %d\n", data);
 		available->data = data;
 		nodes = nodes->next;
 		if (nodes == NULL)

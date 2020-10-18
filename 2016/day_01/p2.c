@@ -2,8 +2,9 @@
 
 int check(_V2 *pos, int x, int y, int i)
 {
-	int n = 0;
+	int n;
 
+	n = 0;
 	while (n < i)
 	{
 		if(pos[n].x == x && pos[n].y == y)
@@ -13,14 +14,13 @@ int check(_V2 *pos, int x, int y, int i)
 	return 0;
 }
 
-
 int distance(_Node *list, int size)
 {
-	int	dir = 0, x = 0, y = 0, x_inc, y_inc;
-	int num;
-	int i;
-	_V2 *pos;
-	_Node *head;
+	int		dir = 0, x = 0, y = 0, x_inc, y_inc;
+	int		num;
+	int		i;
+	_V2		*pos;
+	_Node	*head;
 
 	i = 0;
 	num = 0;
@@ -74,8 +74,8 @@ int distance(_Node *list, int size)
 
 int		main()
 {
-	_Node *list;
-	int len;
+	_Node	*list;
+	int		len;
 
 	list = fetch_by_word("input", " ,", 1, &len);
 	printf("Input : %d\n", distance(list, len));

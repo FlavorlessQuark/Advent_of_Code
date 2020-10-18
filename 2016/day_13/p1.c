@@ -23,7 +23,7 @@ void	new_tile(_Tile *tail, int x, int y)
 	tail->next = new;
 }
 
-int check_wall(int x, int y, int num)
+int check_wall(int num, int x, int y)
 {
 	int result;
 	int i;
@@ -59,9 +59,9 @@ int check_list(int x, int y, _Tile *head)
 
 int main()
 {
-	int number;
-	_Tile *head;
-	_Tile *list;
+	int		number;
+	_Tile	*head;
+	_Tile	*list;
 
 	number = 1364;
 
@@ -74,21 +74,20 @@ int main()
 
 	while (list != NULL)
 	{
-		if (list->x == 31 && list->y == 39)
+		if(list->x == 31 && list->y == 39)
 			break ;
-		if (check_wall(list->x + 1, list->y, number) && check_list(list->x + 1, list->y, head))
-			new_tile(list, list->x + 1, list->y);
+		if(check_wall(number, list->x + 1, list->y) && check_list(list->x + 1, list->y, head))
+			new_tile (list  , list->x + 1, list->y);
 
-		if (check_wall(list->x - 1, list->y, number) && check_list(list->x - 1, list->y, head))
-			new_tile(list, list->x - 1, list->y);
+		if(check_wall(number, list->x - 1, list->y) && check_list(list->x - 1, list->y, head))
+			new_tile (list  , list->x - 1, list->y);
 
-		if (check_wall(list->x, list->y + 1, number) && check_list(list->x, list->y + 1, head))
-			new_tile(list, list->x, list->y + 1);
+		if(check_wall(number, list->x, list->y + 1) && check_list(list->x, list->y + 1, head))
+			new_tile (list  , list->x, list->y + 1);
 
-		if (check_wall(list->x + 1, list->y - 1, number) && check_list(list->x, list->y - 1, head))
-			new_tile(list, list->x + 1, list->y - 1);
+		if(check_wall(number, list->x, list->y - 1) && check_list(list->x, list->y - 1, head))
+			new_tile (list  , list->x, list->y - 1);
 		list = list->next;
 	}
-
 	printf("%d\n", list->value);
 }

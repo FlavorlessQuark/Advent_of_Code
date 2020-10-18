@@ -59,21 +59,22 @@ int check_list(int x, int y, _Tile *head, int *location)
 
 int main()
 {
-	int number;
-	int location;
-	int i;
-	_Tile *head;
-	_Tile *list;
+	int		number;
+	int		location;
+	int		i;
+	_Tile	*head;
+	_Tile	*list;
 
-	number = 1364;
+	i = 0;
 	location = 1;
+	number = 1364;
+	
 	list = malloc(sizeof(_Tile));
 	list->x = 1;
 	list->y = 1;
 	list->value = 1;
 	list->next = NULL;
 	head = list;
-	i = 0;
 
 	while (i < 50)
 	{

@@ -9,17 +9,17 @@ Interestingly after learning python, I look at file parsing differently >.<
 
 Need to Update aoc.h:
 
-Fetch by word by line ();
-|               | Pros          	  | Cons  |
-| ------------- |:-------------:	  | -----:|
-| Array of list |easy to iterate **/** Only one call to malloc |Need to know line count beforehand **/** Potential need to read file twice **/** Not good for large files|
-| Lists of list |Only one file read is enough |A pain to iterate through **/** Multiple calls to malloc **/** More pointers than I'd like|
+ - [ ] _sizeof / typeof/ inline vs extern vs static / variadic macros / tokenization
+ - [ ] byte manipulatin for  faster count / swap / min-max
+ - [ ] Swap macro, because that's simple and long overdue using the above ^
+ - [ ] Map macro(takes an iterable and a function that does something with the members of the iterable), iterable should be either a list or an array;
+ - [ ] List Merge sort that can merge no matter what the data type is (macro redirect to function) and based on a function to be mapped.
+ - [ ] More parsing functions, general by line and word.
+ - [ ] Array to list by delimiter and vice versa
+ - [ ] Dictionaries would be immensely useful
+ - [ ] 1D, 2D, 3D, any D array allocation though I doubt I will need more than 2D
+ - [ ] Stack memory allocation with alloca and _malloca.
+ - [ ] List len, append, prepend etc...
+ - [ ] array append, prepend etc..
+**Some problems need better or redone solutions**
 
-
-**Need to check something about unallocated memory**
-
-*If a list pointer *lst has an adress 0x000001 , is it valid to have another pointer *lst1 such that *lst1 = lst + sizeof(lst)?*
-*Would 0x000009 be a valid adress ? Or does it need to be allocated?*
-*I have to test this in the void_sandbox but I think it will either result in segfault or memory corruption over time...*
-
-**Look into len and log**

@@ -1,9 +1,15 @@
 #include "../aoc.h"
 
-int distance(_Node *list)
+int		distance(_Node *list)
 {
-	int	dir = 0, x = 0, y = 0;
+	int	dir;
+	int x;
+	int y;
 	int num;
+
+	x = 0;
+	y = 0;
+	dir = 0;
 	while(list->next != NULL)
 	{
 		extract_num(list->data, &num);
@@ -27,8 +33,8 @@ int distance(_Node *list)
 
 int		main()
 {
-	_Node *list;
-	int len;
+	_Node	*list;
+	int 	len;
 
 	list = fetch_by_word("input", " ,", 2, &len);
 	const char *str = list->data;

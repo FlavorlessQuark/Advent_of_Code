@@ -96,10 +96,6 @@ int main()
 		memset(grid[len], '.', 50);
 		len++;
 	}
-
-	// rect(1,2, grid);
-	// print(grid);
-
 	str = strtok((char *)file.content, "\n");
 
 	int n  = 0;
@@ -118,10 +114,4 @@ int main()
 		n++;
 	}
 	print(grid);
-	// printf("len %lu\n", strspn(str, ABC_L));
-
-	// printf("%s\n", str[0]);
-	// printf("%s\n", str[1]);
-	// printf("%s\n", str[2]);
-
 }

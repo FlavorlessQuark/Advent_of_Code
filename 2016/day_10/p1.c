@@ -47,7 +47,7 @@ int read_instruction(bot *blist, _Node *list)
 	head = blist;
 	if (strlen(list->data) == 0)
 		return 1;
-	if (list->data[0] == 'v')
+	if (blist->data[0] == 'v')
 	{
 		botval = extract_num(list->data + 18, &botval);
 		blist = find_bot(botval, head);
@@ -100,7 +100,7 @@ int run(_Node *list)
 				{
 					if (botlist->low == 17 && botlist->high == 61)
 					{
-						printf("%d\n", botlist->number)
+						printf("%d\n", botlist->number);
 					}
 				}
 			}

@@ -1,9 +1,5 @@
 #include "../aoc.h"
 
-//This whole thing looks like a bit problem, however no type can holde that many bits
-//Unsure about how to create said type, but it can probably be done
-//To do later in AoC+
-
 char *strrev(char *str)
 {
 	int i, len;
@@ -45,7 +41,6 @@ void checksum(char *str)
 	{
 		n = 0;
 		i = 1;
-	//	printf("str :%s\n", str);
 		while (i < strlen(str))
 		{
 			if (str[i] == str[i - 1])

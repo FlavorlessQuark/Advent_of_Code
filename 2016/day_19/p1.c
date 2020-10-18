@@ -3,14 +3,13 @@
 
 int main()
 {
-	_Node *list;
-	int size;
-	int i;
-
-	size = 5;
-	list = malloc(size * sizeof(_Node));
+	_Node	*list;
+	int		size;
+	int		i;
 
 	i = 0;
+	size = 5;
+	list = malloc(size * sizeof(_Node));
 	while (i < size)
 	{
 		(i == size - 1) ? (list[i].next = &list[0]) : (list[i].next = &list[i + 1]);

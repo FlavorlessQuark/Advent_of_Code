@@ -53,7 +53,6 @@ int main()
 
 	while (current != NULL)
 	{
-		printf("Top (%d, %d) %s\n", current->x, current->y, current->path);
 		get_new_hash(current->path, hash);
 		if (current->x == 4 && current->y == 4)
 			break;
@@ -71,6 +70,5 @@ int main()
 			tile(join(current->path,"R"), current->x + 1, current->y, head);
 		current = current->next;
 	}
-		printf("Bottom\n");
 	printf("%s\n", current->path);
 }

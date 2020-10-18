@@ -10,7 +10,6 @@ char is_safe(int x, int y, char** traps, int *count)
 	(traps[x][y] == '.') ? (m = 0) : (m = 1);
 
 	total = r + m + l;
-	// printf("%d %d %d %c  %d\n", r , m, l, traps[x][y], x);
 	if ((total == 1 && m == 1) || (total == 2 && m == 0) || total == 3 || total == 0)
 	{
 		*count += 1;

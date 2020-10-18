@@ -177,6 +177,18 @@ void _printlst(_Node *lst)
 	}
 }
 
+char *strrev(char *str, int start, int end)
+{
+	if (end == NULL)
+		end = strlen(str);
+	while (start < end)
+	{
+		swapi(&str[start], &str[end]);
+		start++;
+		end--;
+	}
+	return str;
+}
 /////------------ Parsing functions ------------\\\\\
 
 // Returns a list of words from str, separated by delimiters

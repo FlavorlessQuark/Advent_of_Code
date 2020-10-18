@@ -56,24 +56,19 @@ int main()
 
 	while (current != NULL)
 	{
-		printf("Top (%d, %d) %s\n", current->x, current->y, current->path);
 		get_new_hash(current->path, hash);
 		if (current->x == 4 && current->y == 4)
 			break;
 
 		if (check_wall (hash, 0, current->x,	 current->y - 1))
 			tile(join(current->path,"U"), current->x,	 current->y - 1, head, current->val);
-
 		if (check_wall (hash, 1, current->x,	 current->y + 1))
 			tile(join(current->path,"D"), current->x,	 current->y + 1, head, current->val);
-
 		if (check_wall (hash, 2, current->x - 1, current->y))
 			tile(join(current->path,"L"), current->x - 1, current->y, head, current->val);
-
 		if (check_wall (hash, 3, current->x + 1, current->y))
 			tile(join(current->path,"R"), current->x + 1, current->y, head, current->val);
 		current = current->next;
 	}
-		printf("Bottom\n");
 	printf("%s %d\n", current->path, current->val);
 }
