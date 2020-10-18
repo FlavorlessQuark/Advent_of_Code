@@ -11,6 +11,7 @@
 # include <stddef.h>
 # include <math.h>
 # include <ctype.h>
+# include <stdbool.h>
 
 // #include <regex.h> Not sure where this file is or where to get it.
 // I suspect that it is simply not available on WSL, but I would need to check on a VM
@@ -45,41 +46,40 @@ typedef struct	vect
 /////------------ Macros ------------\\\\\
 
 # define MAX(x, y)\
-	({__typeof__ (x) _x} = (x);\
-	({__typeof__ (y) _y} = (y);\
+	({__typeof__ (x) _x = (x);\
+	__typeof__ (y) _y = (y);\
 	_x < _y ? _y : _x;})
 
 # define MIN(x, y)\
-	({__typeof__ (x) _x} = (x);\
-	({__typeof__ (y) _y} = (y);\
+	({__typeof__ (x) _x = (x);\
+	__typeof__ (y) _y = (y);\
 	_x > _y ? _y : _x;})
 
 # define POW2(x)\
 
 
-/////------------ Numbers functions------------\\\\\
+/////------------ Number functions------------\\\\\
 
-inline int		numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
+static inline int	numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
 
-inline char	*itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,"%d", number); return str;}
+static inline char	*itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,"%d", number); return str;}
 
-inline extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
+static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
 
 /////------------ String functions ------------\\\\\
 
-//Joins two strings together
-inline *join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1);snprintf(str, len,  "%s%s", s1,s2);return str;}
+static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1);snprintf(str, len,  "%s%s", s1,s2);return str;}
 
-//Counts occurences of a char within a string
-inline count_occurence(char *str, char c){int count = 0; while (*str++) {count += (*str == c) ? 1 : 0;} return count;}
+static inline int	count_occurence(char *str, char c){int count = 0; while (*str++) {count += (*str == c) ? 1 : 0;} return count;}
 
 //Rotates string left (negative shift) or right (positive shift)
-inline void strshift(int shift, char *str)
+static inline void	strshift(int shift, char *str)
 {
 	char last;
 	size_t i,len;
 	int step;
 
+	len = strlen(str);
 	step = (shift >= 0) ? 1 : -1;
 	while (shift != 0)
 	{
@@ -97,7 +97,7 @@ inline void strshift(int shift, char *str)
 /////------------ Sorting algorithms ------------\\\\\
 
 //Merge two sorted lists.
-inline _Node *_lstSort_(_Node *h1, _Node *h2)
+static _Node		*_lstSort_(_Node *h1, _Node *h2)
 {
 	_Node head;
 	_Node *list;
@@ -132,7 +132,7 @@ inline _Node *_lstSort_(_Node *h1, _Node *h2)
 }
 
 //List Merge Sort
-inline _Node *lstMsort(_Node *head, int len)
+static inline _Node *lstMsort(_Node *head, int len)
 {
 	_Node *h1;
 	_Node *h2;
@@ -153,7 +153,7 @@ inline _Node *lstMsort(_Node *head, int len)
 
 		h1 = lstMsort(h1,(len / 2));
 		h2 = lstMsort(h2, (len / 2));
-		head = _lstSort(h1, h2);
+		head = _lstSort_(h1, h2);
 	}
 	return head;
 }
@@ -161,9 +161,9 @@ inline _Node *lstMsort(_Node *head, int len)
 /////------------ List functions ------------\\\\\
 
 //Returns a new node;
-inline _Node *new_node() {_Node *node; node = calloc(1 , sizeof(_Node)); return node;}
+static inline _Node	*new_node() {return (_Node *)calloc(1 , sizeof(_Node));}
 
-inline void _printlst(_Node *lst)
+static inline void	_printlst(_Node *lst)
 {
 	while (lst != NULL)
 	{
@@ -172,22 +172,22 @@ inline void _printlst(_Node *lst)
 	}
 }
 
-inline char *strrev(char *str, int start, int end)
-{
-	if (end == NULL)
-		end = strlen(str);
-	while (start < end)
-	{
-		swapi(&str[start], &str[end]);
-		start++;
-		end--;
-	}
-	return str;
-}
+// static char			*strrev(char *str, int start, int end)
+// {
+// 	if (end == NULL)
+// 		end = strlen(str);
+// 	while (start < end)
+// 	{
+// 		swapi(&str[start], &str[end]);
+// 		start++;
+// 		end--;
+// 	}
+// 	return str;
+// }
 /////------------ Parsing functions ------------\\\\\
 
 // Returns a list of words from str, separated by delimiters
-inline _Node *fetch_words(char  *str, char *delimeters, size_t *len)
+static _Node		*fetch_words(char  *str, char *delimeters, size_t *len)
 {
 	_Node *list;
 	_Node *head;
@@ -210,9 +210,8 @@ inline _Node *fetch_words(char  *str, char *delimeters, size_t *len)
 	return head;
 }
 
-
 // Reads file into _File struct.
-inline _File fetch_file(char *filename, int trim)
+static _File		fetch_file(char *filename, int trim)
 {
 	FILE	*file;
 	_File	data;
@@ -230,7 +229,7 @@ inline _File fetch_file(char *filename, int trim)
 }
 
 // Reads input file into a list of words. Words are sperated by *delimeter
-inline _Node *fetch_by_word(char *filename, char *delimeters, int trim, size_t *len)
+static _Node		*fetch_by_word(char *filename, char *delimeters, int trim, size_t *len)
 {
 	_File	data;
 	_Node	*list;
@@ -244,7 +243,7 @@ inline _Node *fetch_by_word(char *filename, char *delimeters, int trim, size_t *
 
 /////------------ MD5 functions ------------\\\\\
 
-inline void format_hash(unsigned char hash[16], char *final)
+static	void		format_hash(unsigned char hash[16], char *final)
 {
 	int n = 0;
 	char str[3];
@@ -259,7 +258,7 @@ inline void format_hash(unsigned char hash[16], char *final)
 	}
 }
 
-inline void get_new_hash(char *input, char *hash)
+static inline void	get_new_hash(char *input, char *hash)
 {
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
 
