@@ -12,6 +12,7 @@
 # include <math.h>
 # include <ctype.h>
 # include <stdbool.h>
+# include <math.h>
 
 // #include <regex.h> Not sure where this file is or where to get it.
 // I suspect that it is simply not available on WSL, but I would need to check on a VM
