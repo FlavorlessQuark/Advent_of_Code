@@ -58,8 +58,12 @@ typedef struct	vect
 
 # define POW2(x)\
 
+# define SWAP(x, y)\
+
 
 /////------------ Number functions------------\\\\\
+
+// count numbers;
 
 static inline int	numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
 
@@ -161,16 +165,54 @@ static inline _Node *lstMsort(_Node *head, int len)
 
 /////------------ List functions ------------\\\\\
 
-//Returns a new node;
-static inline _Node	*new_node() {return (_Node *)calloc(1 , sizeof(_Node));}
+//List search
 
-static inline void	_printlst(_Node *lst)
+//Returns a new node;
+static inline	_Node	*new_node() {return (_Node *)calloc(1 , sizeof(_Node));}
+
+static inline	_Node	*get_last(_Node *head) {while(head->next != NULL)head = head->next;return head;}
+
+static	_Node			*search_list(_Node *list, char *str)
+{
+	while (list != NULL)
+	{
+		if (!strcmp(list->data, str))
+			return list;
+		list = list->next;
+	}
+	return NULL;
+}
+
+static	void			_printlst(_Node *lst)
 {
 	while (lst != NULL)
 	{
 		printf("%s\n", lst->data);
 		lst = lst->next;
 	}
+}
+
+
+/////------------ Conversion functions ------------\\\\\
+
+//Here : list to array | arra to list by type : char *, int *, char **, int**;
+
+static char *convert_intstr(int *array, size_t len, char *separator)
+{
+	size_t i;
+	char *str;
+
+	i = 0;
+	str = "";
+	while (1)
+	{
+		str = join(str, itoa(array[i]));
+		i++;
+		if (i >= len)
+			break ;
+		str = join(str, separator);
+	}
+	return str;
 }
 
 // static char			*strrev(char *str, int start, int end)
@@ -253,16 +295,14 @@ static	void		format_hash(unsigned char hash[16], char *final)
 	{
 		sprintf(str,"%.2x", hash[i]);
 		final[n] = str[0];
-		n++;
-		final[n] = str[1];
-		n++;
+		final[n + 1] = str[1];
+		n += 2;
 	}
 }
 
 static inline void	get_new_hash(char *input, char *hash)
 {
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
-
 	CC_MD5(input, strlen(input), result);
 	format_hash(result, hash);
 }
