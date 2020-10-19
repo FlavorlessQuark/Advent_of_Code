@@ -3,6 +3,7 @@ Christmas comes early this year
 https://adventofcode.com/
 
 09/28/2020 : **Achievment unlocked**: Snake Master!
+
 10/18/2020 : **Achievment unlocked**: Now we're getting serious
 
 ---
