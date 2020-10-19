@@ -13,15 +13,12 @@
 # include <ctype.h>
 # include <stdbool.h>
 # include <math.h>
-
-// #include <regex.h> Not sure where this file is or where to get it.
-// I suspect that it is simply not available on WSL, but I would need to check on a VM
-// In the meantime I will do without
+# include <regex.h>
 
 # define ABC_U	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define ABC_L	"abcdefghijklmnopqrstuvwxyz"
 # define MATHC	"()x*"
-# define NUMS	"0123456789"
+# define NUMS	"-0123456789"
 # define NMATHC	"0123456789-+()x*=/ "
 
 /////------------ Structs ------------\\\\\
@@ -63,7 +60,7 @@ typedef struct	vect
 
 /////------------ Number functions------------\\\\\
 
-// count numbers;
+// ADD count numbers for : list, char *;
 
 static inline int	numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
 
@@ -104,33 +101,16 @@ static inline void	strshift(int shift, char *str)
 //Merge two sorted lists.
 static _Node		*_lstSort_(_Node *h1, _Node *h2)
 {
-	_Node head;
-	_Node *list;
+	_Node head, *list;
 
 	list = &head;
 	list->next = NULL;
 	while (1)
 	{
-		if(h1 == NULL)
-		{
-			list->next = h2;
-			break ;
-		}
-		if (h2 == NULL)
-		{
-			list->next = h1;
-			break ;
-		}
-		if (atol(h1->data) <= atol(h2->data))
-		{
-			list->next = h1;
-			h1 = h1->next;
-		}
-		else
-		{
-			list->next = h2;
-			h2 = h2->next;
-		}
+		if (h1 == NULL) {list->next = h2;break ;}
+		if (h2 == NULL) {list->next = h1;break ;}
+		if (atol(h1->data) <= atol(h2->data)) {list->next = h1;h1 = h1->next;}
+		else {list->next = h2; h2 = h2->next;}
 		list = list->next;
 	}
 	return head.next;
@@ -139,26 +119,21 @@ static _Node		*_lstSort_(_Node *h1, _Node *h2)
 //List Merge Sort
 static inline _Node *lstMsort(_Node *head, int len)
 {
-	_Node *h1;
-	_Node *h2;
-	int i;
+	_Node	*h1, *h2;
+	int		i;
 
 	h1 = head;
 	i = 0;
 	if (len >= 2)
 	{
-		while (h1->next != NULL && i < (len / 2) - 1)
-		{
-			h1 = h1->next;
-			i++;
-		}
+		while (h1->next != NULL && i < (len / 2) - 1){h1 = h1->next;i++;}
 		h2 = h1->next;
 		h1->next = NULL;
 		h1 = head;
 
-		h1 = lstMsort(h1,(len / 2));
-		h2 = lstMsort(h2, (len / 2));
-		head = _lstSort_(h1, h2);
+		h1	 =	lstMsort(h1,(len / 2));
+		h2	 =	lstMsort(h2, (len / 2));
+		head =	_lstSort_(h1, h2);
 	}
 	return head;
 }
@@ -238,7 +213,11 @@ static _Node		*fetch_words(char  *str, char *delimeters, size_t *len)
 	head = new_node();
 	list = head;
 
+	if (str == '\0')
+		return NULL;
 	str = strtok(str, delimeters);
+	if (str == NULL)
+		return NULL;
 	while (1)
 	{
 		*len += 1;
@@ -262,8 +241,8 @@ static _File		fetch_file(char *filename, int trim)
 	file = fopen(filename, "r");
 	fseek(file, 0L , SEEK_END);
 
-	data.filesize = ftell(file);
-	data.content = calloc(data.filesize + 1, 1);
+	data.filesize	= ftell(file);
+	data.content	= calloc(data.filesize + 1, 1);
 
 	rewind(file);
 	fread(data.content, data.filesize - trim, 1, file);
