@@ -40,6 +40,9 @@ Need to Update aoc.h:
  - [ ] List len, append, prepend etc...
  - [ ] array append, prepend etc..
 **Some problems need better or redone solutions**
+---
+Quick thoughts about things:
 
+Maybe it's worth it to make classes? As struct with an iterator, a print function, a map function etc; It's getting tiring to rwrite the same iterating loop.It's like living on a merry go round and round it seems to go.
 
 [0]:https://github.com/FlavorlessQuark/Black_Hole/tree/master/Quarks
