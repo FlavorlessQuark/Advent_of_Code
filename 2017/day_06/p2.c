@@ -46,17 +46,6 @@ char *convert_intstr(int *array, size_t len, char *separator)
 	return str;
 }
 
-bool search_list(_Node *list, char *str)
-{
-	while (list != NULL)
-	{
-		if (!strcmp(list->data, str))
-			return true;
-		list = list->next;
-	}
-	return false;
-}
-
 int main()
 {
 	_File	file;

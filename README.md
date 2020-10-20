@@ -13,6 +13,7 @@ https://adventofcode.com/
 As I finish year 2015, I have recorded what I think is important in Python in the **[Black_Hole][0]**
 Feel free to give me any thoughts and tips on what I may have gotten wrong or missed
 
+
 ## [C] -2016- Angels we have heard on high, singing sweetly through the night..
 
 For this year, I have started to get into the C preprocessor and more in depth C as well. To be continued...
