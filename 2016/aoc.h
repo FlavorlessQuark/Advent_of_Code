@@ -26,13 +26,12 @@
 typedef struct	s_list
 {
 	struct s_list *next;
-	void *data; // Conversion to char * does not seem to work. atoi() considers this a void * even when cast to char *
+	void *data;
 }				_Node;
 
 typedef struct	data
 {
 	size_t filesize;
-
 	char *content;
 }				_File;
 
@@ -53,6 +52,9 @@ typedef struct	vect
 	({__typeof__ (x) _x} = (x);\
 	({__typeof__ (y) _y} = (y);\
 	_x > _y ? _y : _x;})
+
+# define POW2(x)\
+
 
 /////------------ Numbers functions------------\\\\\
 
