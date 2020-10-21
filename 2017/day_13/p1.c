@@ -14,8 +14,7 @@ int main()
 	severity = 0;
 	while (input != NULL)
 	{
-		input->data += extract_num(input->data, &depth);
-		input->data += extract_num(input->data, &range);
+		extract_num(input->data + extract_num(input->data, &depth);, &range);
 		if (depth % (range * 2 - 2) == 0)
 			severity += (depth * range);
 		input = input->next;
