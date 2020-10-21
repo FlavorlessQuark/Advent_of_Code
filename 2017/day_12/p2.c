@@ -36,28 +36,11 @@ int countbool(bool *list, size_t len)
 	return count;
 }
 
-int main()
+void inloop(bool *coms, char **programs, size_t len)
 {
-	_Node *input;
-	char **programs;
 	char *tmp;
-	size_t len;
 	size_t i;
 	int pid;
-	bool *coms;
-
-	input = fetch_by_word("input", "\n", 1, &len);
-	coms = calloc(len, sizeof(bool));
-	coms[0] = true;
-	programs = malloc(len * sizeof(programs));
-
-	i = 0;
-	while (input != NULL)
-	{
-		programs[i] = input->data;
-		i++;
-		input = input->next;
-	}
 
 	i = 0;
 	while (i < len)
@@ -72,6 +55,45 @@ int main()
 		}
 		i++;
 	}
+}
+
+int main()
+{
+	_Node *input;
+	char **programs;
+	char *tmp;
+	size_t len;
+	size_t i;
+	int pid;
+	int groups;
+	bool *coms;
+
+	groups = 0;
+	input = fetch_by_word("input", "\n", 1, &len);
+	coms = calloc(len, sizeof(bool));
+	programs = malloc(len * sizeof(programs));
+
+	i = 0;
+	while (input != NULL)
+	{
+		programs[i] = input->data;
+		i++;
+		input = input->next;
+	}
+
+	i = 0;
+
+	while (i < len)
+	{
+		if (coms[i] == false)
+		{
+			// printf("coms id %zu\n", i);
+			groups++;
+			coms[i] = true;
+			inloop(coms, programs, len);
+		}
+		i++;
+	}
 	// _printbool(coms, len);
-	printf("Solution %d\n", countbool(coms, len));
+	printf("Solution %d\n", groups);
 }
