@@ -53,14 +53,29 @@ typedef struct	vect
 	__typeof__ (y) _y = (y);\
 	_x > _y ? _y : _x;})
 
-# define POW2(x)\
+// # define POW2(x)\
 
-# define SWAP(x, y)\
+// # define SWAP(x, y)\
 
 
-/////------------ Number functions------------\\\\\
+// # define _PRINTARRAY()
+//  Need to think more about the structure of this.It must be modular enough to use any type for any dimension
+// # define _ARRAY()
+// {
+
+// }
+
+// # define _2D_ARRAY(ptr, type, )
+// {
+
+// }
+
+
+/////------------ Utilities functions------------\\\\\
 
 // ADD count numbers for : list, char *;
+
+static inline void _printbool(bool *lst, size_t len){size_t i; i = 0; while (i < len) {printf("%d ", lst[i]);  i++;} putchar('\n');}
 
 static inline void	_printnum(int *list, size_t len){size_t i; i = 0; while (i < len) {printf("%d ", list[i]); i++;} putchar('\n');}
 
@@ -70,12 +85,12 @@ static inline char	*itoa(int number){char *str; str = malloc(numlen(number) + 1)
 
 static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
 
-/////------------ String functions ------------\\\\\
 
 static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1);snprintf(str, len,  "%s%s", s1,s2);return str;}
 
 static inline int	count_occurence(char *str, char c){int count = 0; while (*str++) {count += (*str == c) ? 1 : 0;} return count;}
 
+/////------------ String functions ------------\\\\\
 //Rotates string left (negative shift) or right (positive shift)
 static inline void	strshift(int shift, char *str)
 {
@@ -88,11 +103,7 @@ static inline void	strshift(int shift, char *str)
 	while (shift != 0)
 	{
 		(step == 1) ? (last = str[len - 1], i = len - 2) : (last = str[0], i = 1);
-		while (i >= 0 && i <= len)
-		{
-			str[i + step] = str[i];
-			i -= step;
-		}
+		while (i >= 0 && i <= len) {str[i + step] = str[i];i -= step;}
 		shift--;
 	}
 	(step == 1) ? (str[0] = last) : (str[len - 1] = last);
