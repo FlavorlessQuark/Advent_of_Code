@@ -8,15 +8,8 @@ https://adventofcode.com/
 
 ---
 
-## [Python] -2015- Hark how the bells, sweet silver bells...
-
 As I finish year 2015, I have recorded what I think is important in Python in the **[Black_Hole][0]**
 Feel free to give me any thoughts and tips on what I may have gotten wrong or missed
-
-
-## [C] -2016- Angels we have heard on high, singing sweetly through the night..
-
-For this year, I have started to get into the C preprocessor and more in depth C as well. To be continued...
 
 ## Reminder to self
 
@@ -39,10 +32,12 @@ Need to Update aoc.h:
  - [ ] Stack memory allocation with alloca and _malloca.
  - [ ] List len, append, prepend etc...
  - [ ] array append, prepend etc..
+
 **Some problems need better or redone solutions**
+
 ---
 Quick thoughts about things:
 
-Maybe it's worth it to make classes? As struct with an iterator, a print function, a map function etc; It's getting tiring to rwrite the same iterating loop.It's like living on a merry go round and round it seems to go.
+Maybe it's worth it to make classes? As struct with an iterator, a print function, a map function etc; It's getting tiring to rwrite the same iterating loop. It's like living on a merry-go-round.
 
 [0]:https://github.com/FlavorlessQuark/Black_Hole/tree/master/Quarks

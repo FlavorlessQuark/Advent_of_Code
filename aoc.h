@@ -17,9 +17,14 @@
 
 # define ABC_U	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define ABC_L	"abcdefghijklmnopqrstuvwxyz"
+# define HEX_L	"0123456789abcdef"
+# define HEX_U	"0123456789ABCDEF"
 # define MATHC	"()x*"
 # define NUMS	"-0123456789"
 # define NMATHC	"0123456789-+()x*=/ "
+
+# define _HIDDEN_ __attribute__((visibility("hidden")))
+# define _INTERN_ __attribute__((visibility("internal")))
 
 /////------------ Structs ------------\\\\\
 
@@ -41,6 +46,33 @@ typedef struct	vect
 	int y;
 }			_V2;
 
+/////------------ Utilities functions------------\\\\\
+
+// ADD count numbers for : list, char *;
+
+static inline void swap (char *a, char *b)
+{
+	char tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+static inline void	_printbool(bool *lst, size_t len){size_t i; i = 0; while (i < len) {printf("%d ", lst[i]);  i++;} putchar('\n');}
+
+static inline void	_printnum(int *list, size_t len){size_t i; i = 0; while (i < len) {printf("%d ", list[i]); i++;} putchar('\n');}
+
+static inline int	numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
+
+static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
+
+static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1); snprintf(str, len,  "%s%s", s1,s2);return str;}
+
+static inline int	count_occurence(char *str, char c){int count = 0; while (*str++) {count += (*str == c) ? 1 : 0;} return count;}
+
+# define _DEBUG_(msg, ...) fprintf(stderr, "\033[1;91m[LOG](%s:%d) >>\033[0m "msg"\n", __FILE__, __LINE__, ##__VA_ARGS__)
+
 /////------------ Macros ------------\\\\\
 
 # define MAX(x, y)\
@@ -53,42 +85,36 @@ typedef struct	vect
 	__typeof__ (y) _y = (y);\
 	_x > _y ? _y : _x;})
 
-// # define POW2(x)\
+void _intp_	(int *ptr, size_t len)	{size_t i; i = 0;while (i < len) {printf("%d\n", ptr[i]); i++;};}
+void _boolp_(bool *ptr, size_t len)	{size_t i; i = 0;while (i < len) {ptr[i] == true ? printf("True\n") : printf("False\n"); i++;}}
+void _vectp_(_V2 **ptr, size_t len)	{size_t i; i = 0; while (i < len) {printf("(%d,%d)\n", ptr[i]->x, ptr[i]->y); i++;}}
+void _nodep_(_Node *ptr, size_t len){while (ptr != NULL){printf("%s\n", ptr->data);ptr = ptr->next;}}
+void _defp_	(void *ptr, size_t len)	{_DEBUG_("PRINTING WITH UNDEFINED TYPE (likely char *, use printf you moron)");}
 
-// # define SWAP(x, y)\
 
-
-// # define _PRINTARRAY()
+# define _PRINT_1D(array, size) _Generic((array),\
+	int		*: _intp_ ((int  *)array, size),\
+	bool	*: _boolp_((bool *)array, size),\
+	_Node	*: _nodep_((_Node *)array, size),\
+	_V2		**: _vectp_((_V2 **)array, size),\
+	default	 : _defp_ (array, size))
 //  Need to think more about the structure of this.It must be modular enough to use any type for any dimension
-// # define _ARRAY()
+
+
+// # define _ARRAY(array, size)
 // {
 
 // }
 
-// # define _2D_ARRAY(ptr, type, )
+// # define _2D_ARRAY(ptr, type)
 // {
 
 // }
 
+// # define MAP(data, func)
+// {
 
-/////------------ Utilities functions------------\\\\\
-
-// ADD count numbers for : list, char *;
-
-static inline void _printbool(bool *lst, size_t len){size_t i; i = 0; while (i < len) {printf("%d ", lst[i]);  i++;} putchar('\n');}
-
-static inline void	_printnum(int *list, size_t len){size_t i; i = 0; while (i < len) {printf("%d ", list[i]); i++;} putchar('\n');}
-
-static inline int	numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
-
-static inline char	*itoa(int number){char *str; str = malloc(numlen(number) + 1); sprintf(str,"%d", number); return str;}
-
-static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
-
-
-static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1);snprintf(str, len,  "%s%s", s1,s2);return str;}
-
-static inline int	count_occurence(char *str, char c){int count = 0; while (*str++) {count += (*str == c) ? 1 : 0;} return count;}
+// }
 
 /////------------ String functions ------------\\\\\
 //Rotates string left (negative shift) or right (positive shift)
@@ -112,7 +138,7 @@ static inline void	strshift(int shift, char *str)
 /////------------ Sorting algorithms ------------\\\\\
 
 //Merge two sorted lists.
-static _Node		*_lstSort_(_Node *h1, _Node *h2)
+_HIDDEN_ static _Node		*_lstSort_(_Node *h1, _Node *h2)
 {
 	_Node head, *list;
 
@@ -171,37 +197,28 @@ static	_Node			*search_list(_Node *list, char *str)
 	return NULL;
 }
 
-static	void			_printlst(_Node *lst)
-{
-	while (lst != NULL)
-	{
-		printf("%s\n", lst->data);
-		lst = lst->next;
-	}
-}
-
 
 /////------------ Conversion functions ------------\\\\\
 
 //Here : list to array | arra to list by type : char *, int *, char **, int**;
 
-static char *convert_intstr(int *array, size_t len, char *separator)
-{
-	size_t i;
-	char *str;
+// static char *convert_intstr(int *array, size_t len, char *separator)
+// {
+// 	size_t i;
+// 	char *str;
 
-	i = 0;
-	str = "";
-	while (1)
-	{
-		str = join(str, itoa(array[i]));
-		i++;
-		if (i >= len)
-			break ;
-		str = join(str, separator);
-	}
-	return str;
-}
+// 	i = 0;
+// 	str = "";
+// 	while (1)
+// 	{
+// 		// str = asprintf(&sre)
+// 		i++;
+// 		if (i >= len)
+// 			break ;
+// 		// str = join(str, separator);
+// 	}
+// 	return str;
+// }
 
 // static char			*strrev(char *str, int start, int end)
 // {
@@ -264,7 +281,7 @@ static _File		fetch_file(char *filename, int trim)
 }
 
 // Reads input file into a list of words. Words are sperated by *delimeter
-static _Node		*fetch_by_word(char *filename, char *delimeters, int trim, size_t *len)
+static _Node		*fetch_by_wordList(char *filename, char *delimeters, int trim, size_t *len)
 {
 	_File	data;
 	_Node	*list;
@@ -273,6 +290,19 @@ static _Node		*fetch_by_word(char *filename, char *delimeters, int trim, size_t 
 	*len = 0;
 	data = fetch_file(filename, trim);
 	list = fetch_words(data.content, delimeters, len);
+	return list;
+}
+
+static _Node		*fetch_by_wordArr(char *filename, char *delimeters, int trim, size_t *len)
+{
+	_File	data;
+	_Node	*list;
+	char	*str;
+
+	*len = 0;
+	data = fetch_file(filename, trim);
+	// *len = count_occurence(data.content, )
+
 	return list;
 }
 
