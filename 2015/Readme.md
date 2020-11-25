@@ -11,18 +11,26 @@ Thou shalt know that -1 is indeed a valid index...
 
 When thou discovers that *xrange* is faster than *range* for thy looping purposes, then thou shall soon earn thy Scale of Speed
 
-If thou art a member of the reputable **Lazy club** then thou may use and abuse of **[lambda][4]***
-
 If thy courage is great enough then thou may solve any problem with one line of **[regex][3]**
 
 ---
+## Required modules
+
+- Anytree
+- Re
+- Numpy
+
+**Note**
+
+- Most of these assume a new line a the end of the input file
+
 ## Import todo
 
 People always ask where is day22, but not how is day22? Well day22 looks like a long complicated hassle and so I will leave it alone.
 If it can't be done at least partially with math and / or requires actual simulation, I don't want anything to do with it.
 
-- [ ] **Day06**: Did somebody say [Hash_Table, Blessed Tool of the SpeedSeeker] ?
-- [ ] **Day08**: is written more like C. More slithery thinking is required
+- [x] **Day06**: Did somebody say [Hash_Table, Blessed Tool of the SpeedSeeker] ?
+- [x] **Day08**: is written more like C. More slithery thinking is required
 - [ ] **Day19**: Part2 is tricky. Can't be done with a tree (probably can but would take forever) Probably need to work backwards from solution back to e, inverting key with replacement. The input has a
 pattern Rn..Y..Ar | Rn..Ar | or just random letters. The problem is solving it in a pythonic way...
 - [ ] **Day20**: Trying to solve mathematically first... Checking for prime numbers might be a good solution here, though not very pythonic I feel. I might try to use lambad expressions more, or maybe I can
@@ -44,13 +52,14 @@ I should learn to use map(), though I have yet to find a use for it.
 ---
 
 ### This is Sadly only for [python3][2] :(
+	
 Dictionaries can be considered a set and can have anything as a key... even another dictionary
 
 Just like mathematical sets, union, interesections and differences can be performed... See **[Set][1]**
 
 However, I am not sure why one would use a |= b instead of a.update(b) (a and b both being dictionaries)
 
-Xrange is not supported on python 3
+Xrange is not supported on python 3 :(
 
 
 [0]:https://docs.python.org/3/tutorial/datastructures.html?highlight=comprehension#list-comprehensions

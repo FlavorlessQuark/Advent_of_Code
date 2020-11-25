@@ -1,6 +1,4 @@
 from anytree import Node, RenderTree, DoubleStyle
-from collections import defaultdict
-
 
 Distance = {}
 Cities = []
@@ -28,12 +26,7 @@ def tree_iter(current, parent, distance):
 	for child in current.children:
 		tree_iter(child, current, distance)
 
-
-
 with open('input') as input:
-	# Leaving this here just to prove that I know the magic of Comprehensions
-	# _cities = [line.split()[x] for line in input for x in [0,2]]
-	# [Cities.append(y) for y in _cities if y not in Cities]
 
 	for line in input:
 		current = line.split()
@@ -54,5 +47,4 @@ with open('input') as input:
 	for city in Cities:
 		tree_create(city, root, list(Cities))
 	tree_iter(root, root, 0)
-	#print(RenderTree(root, style=DoubleStyle()))
-	print(str(minimum))
+	print("Solution : ", str(minimum))

@@ -1,11 +1,15 @@
 import re
-import itertools
+from itertools import combinations as comb
 
-get = lambda x:
+get_slack =	lambda x : (x[0] * x[1])
+mult =		lambda x : get_slack(x) * 2
 
 with open('input') as input:
 	txt = [line[:-1] for line in input]
-dicts = {e:[a for a in re.findall(r'\d*', txt[e]) if len(a) > 0] for e, stuff in  enumerate(txt)}
 
-num = [a for a in list(comb for e in dicts for comb in itertools.combinations(dicts[e], 2))]
-tot = sum(map(get,num))
+presents =  {key : [int(val) for val in re.findall(r'\d*', txt[key]) if len(val) > 0] for key, _ in  enumerate(txt)}
+wrap = [area for value in presents for area in comb(presents[value], 2)]
+
+slack = [get_slack(sorted(presents[x])) for x in presents]
+
+print("Solution : ", sum(map(mult, wrap)) + sum(slack))

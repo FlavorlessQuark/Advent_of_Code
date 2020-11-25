@@ -1,18 +1,23 @@
-import re
-import json
+# import re
 
-def rm_red(txt):
-	if 'red' in txt:
-		return 0
-	return txt
-# total = 0
-lst = map(rm_red, (num for num in json.loads(open('input', 'r').read())))
+# def rm_red(st):
+# 	index = st.find("red")
+# 	l_bound = index
+# 	r_bound = index
+# 	while (st[l_bound] != "{"):
+# 		l_bound -= 1
+# 	while (st[r_bound] != "}"):
+# 		r_bound += 1
+# 	return (l_bound, r_bound + 1)
 
-num = 0
-for things in lst:
-	num += sum(int(e) for e in map(int, (e for e in re.findall(r'-?\d*', str(things)) if len(e) > 0)))
-print num
+# lst = open('test', 'r').read()
 
-# Could put all of this in  single expressions but :
-# 1) that's too much work for too little a reward
-# 2) Would be total gibberish
+# while "red" in lst:
+# 	bounds = rm_red(lst)
+# 	left = lst[:bounds[0]]
+# 	right = lst[bounds[1]:]
+# 	lst = left + right
+# 	print(lst)
+# num = [int(x) for x in re.findall(r'-?\d*', lst) if len(x) > 0]
+# print(sum(num))
+

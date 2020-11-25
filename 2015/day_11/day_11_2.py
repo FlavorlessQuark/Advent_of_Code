@@ -35,6 +35,5 @@ with open('input')  as input:
 
 indices = [alphabet.index(i)  for i in passw.rstrip()]
 find_next(indices)
+find_next(indices)
 passw = ''.join(alphabet[index] for index in indices)
-
-print(passw)

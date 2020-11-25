@@ -1,4 +1,3 @@
-from array import *
 grid = [[0 for i in range(1000)] for i in range(1000)]
 
 def count_lights():
@@ -6,8 +5,7 @@ def count_lights():
 	count = 0
 
 	for i in range(0, 999):
-		for n in range(0, 999):
-				count += grid[i][n]
+		count += sum(grid[i])
 	return count
 
 def parse(line):
@@ -19,8 +17,8 @@ def parse(line):
 		switch = 2
 	if (lst[1] == "on"):
 		switch = 1
-	back = lst[len(lst) - 1].split(',')
-	front = lst[len(lst) - 3].split(',')
+	back = lst[- 1].split(',')
+	front = lst[ - 3].split(',')
 	for i in range(int(front[1]), int(back[1]) + 1 ):
 		for n in range(int(front[0]), int(back[0]) + 1):
 				grid[n][i] += switch

@@ -87,7 +87,7 @@ x RSHIFT 2 -> y
 fq OR fr -> fs
 bn RSHIFT 5 -> bq
 0 -> c
-956 -> b
+14146 -> b
 d OR j -> k
 z OR aa -> ab
 gf OR ge -> gg

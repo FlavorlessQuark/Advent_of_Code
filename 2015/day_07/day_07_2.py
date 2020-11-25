@@ -42,4 +42,9 @@ def parse(step):
 with open('input') as input:
 	instructions = [line.split() for line in input]
 parse('a')
+
+val = circuit.get('a')
+circuit.clear()
+circuit['b'] = val
+parse('a')
 print("Solution : ", circuit.get('a'))

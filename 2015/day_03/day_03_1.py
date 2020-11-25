@@ -20,6 +20,6 @@ def parse_input(input):
 		y -= 1
 
 with open('input') as input:
-	map(parse_input, char) for cahr in line for line in input]
+	[parse_input(char) for line in input for char in line]
 
-print("houses " + str(len(houses)))
+print("Solution : " + str(len(houses)))

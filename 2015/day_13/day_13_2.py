@@ -44,6 +44,8 @@ with open('input') as input:
 			Happiness[current[0]]["Me"] = 0
 		Happiness[current[0]][current[10]] = gain
 
+People.append("Me")
+Happiness['Me'] = {'Alice':0, 'Bob':0, 'Carol':0, 'David':0, 'Eric':0, 'Frank':0, 'George':0, 'Mallory':0}
 for peeps in People:
 	tree_create(peeps, root, list(People))
 for node in root.children:

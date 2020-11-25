@@ -9,4 +9,4 @@ for char in line:
 	count += 1
 	if floor == -1:
 		break
-print count
+print("Solution : ", count)
