@@ -6,7 +6,7 @@ config = [5000,3018894606110]
 with open('input') as input:
 	pkg = [int(line[:-1]) for line in input]
 
-weight = sum(pkg) // 3
+weight = sum(pkg) // 4
 
 for i in range(1, len(pkg)):
 	for comb in itertools.combinations(pkg, i):

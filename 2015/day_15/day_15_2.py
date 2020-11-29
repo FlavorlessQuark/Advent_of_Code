@@ -19,6 +19,7 @@ for possible in arr:
 	for i in range(len(attr_total)):
 		if attr_total[i] < 0:
 			attr_total[i] = 0
-	maximum = max(reduce(lambda x, y: x * y, attr_total), maximum)
+	if attr_total[4] == 500:
+		maximum = max(reduce(lambda x, y: x * y, attr_total[:4]), maximum)
 
 print("Solution : ", maximum)

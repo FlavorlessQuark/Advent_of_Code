@@ -17,7 +17,7 @@ AuntSue = {'children': 3,
 			'perfumes':1
 }
 
-MatchMaker = lambda x, y: AuntSue[x] == y
+MatchMaker = lambda x, y: AuntSue[x] < y if (x == "tree" or x == "cat") else (AuntSue[x] > y if (x == "pomeranians" or x == "goldfish") else AuntSue[x] == y)
 
 with open('input') as input:
 	for line in input:
@@ -26,6 +26,6 @@ with open('input') as input:
 
 winners  = [sue_id if all([MatchMaker(attr, Sues[sue_id][attr]) for attr in Sues[sue_id]]) else "" for sue_id in Sues]
 
-print("Solution :", "".join(winners))
+print("Solution :", winners)
 
 
