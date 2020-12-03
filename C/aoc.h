@@ -2,6 +2,8 @@
 # define AOC_H
 
 # include <CommonCrypto/CommonDigest.h>
+# include <regex.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -11,9 +13,7 @@
 # include <stddef.h>
 # include <math.h>
 # include <ctype.h>
-# include <stdbool.h>
 # include <math.h>
-# include <regex.h>
 
 # define ABC_U	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define ABC_L	"abcdefghijklmnopqrstuvwxyz"
@@ -47,6 +47,8 @@ typedef struct	vect
 				int y;
 }				_V2;
 
+void 	*_tmp_ptr;
+int		_tmp_int;
 /////------------ Utilities functions------------\\\\\
 
 // ADD count numbers for : list, char *;
@@ -70,7 +72,7 @@ static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NU
 
 static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1); snprintf(str, len,  "%s%s", s1,s2);return str;}
 
-static inline int	count_occurence(char *str, char *c){int count = 0; while ((str = strstr(str, c) != NULL){count++;} return count;}
+static inline int	count_occurence(char *str, char *c){int count = 0; while((str = strstr(str, c) != NULL){count++;} return count;}
 
 # define _DEBUG_(msg, ...) fprintf(stderr, "\033[1;91m[LOG](%s:%d) >>\033[0m "msg"\n", __FILE__, __LINE__, ##__VA_ARGS__)
 
@@ -99,23 +101,18 @@ void _defp_	(void *ptr, size_t len)	{_DEBUG_("PRINTING WITH UNDEFINED TYPE (like
 	_Node	*: _nodep_((_Node *)array, size),\
 	_V2		**: _vectp_((_V2 **)array, size),\
 	default	 : _defp_ (array, size))
-//  Need to think more about the structure of this.It must be modular enough to use any type for any dimension
 
+/////------------ CMP functions ------------\\\\\
 
-// # define _ARRAY(array, size)
-// {
+int		int_CmpLess		(void *a, void *b){return (int *)a < (int *)b;}
+int		int_CmpLessEq	(void *a, void *b){return (int *)a > (int *)b;}
+int		int_CmpGreater	(void *a, void *b){return (int *)a <= (int *)b;}
+int		int_CmpGreaterEq(void *a, void *b){return (int *)a >= (int *)b;}
+int		int_CmpEq		(void *a, void *b){return (int *)a == (int *)b;}
 
-// }
+int		str_CmpLess		(void *a, void *b){return strcmp((char *)a, (char *)b);}
+int		str_CmpGreater	(void *a, void *b){return strcmp((char *)a, (char *)b) * - 1;}
 
-// # define _2D_ARRAY(ptr, type)
-// {
-
-// }
-
-// # define MAP(data, func)
-// {
-
-// }
 
 /////------------ String functions ------------\\\\\
 //Rotates string left (negative shift) or right (positive shift)
@@ -139,7 +136,7 @@ static inline void	strshift(int shift, char *str)
 /////------------ Sorting algorithms ------------\\\\\
 
 //Merge two sorted lists.
-_HIDDEN_ static _Node		*_lstSort_(_Node *h1, _Node *h2)
+_HIDDEN_ static _Node		*_lstSort_(_Node *h1, _Node *h2, int(*cmp_func)(void *, void *))
 {
 	_Node head, *list;
 
@@ -149,7 +146,7 @@ _HIDDEN_ static _Node		*_lstSort_(_Node *h1, _Node *h2)
 	{
 		if (h1 == NULL) {list->next = h2;break ;}
 		if (h2 == NULL) {list->next = h1;break ;}
-		if (atol(h1->data) <= atol(h2->data)) {list->next = h1;h1 = h1->next;}
+		if (cmp_func(&h1->data, &h2->data) <= 0) {list->next = h1;h1 = h1->next;}
 		else {list->next = h2; h2 = h2->next;}
 		list = list->next;
 	}
@@ -157,7 +154,7 @@ _HIDDEN_ static _Node		*_lstSort_(_Node *h1, _Node *h2)
 }
 
 //List Merge Sort
-static inline _Node *lstMsort(_Node *head, int len)
+static inline _Node *lstMsort(_Node *head, int len, int(*cmp_func)(void *, void *))
 {
 	_Node	*h1, *h2;
 	int		i;
@@ -171,9 +168,9 @@ static inline _Node *lstMsort(_Node *head, int len)
 		h1->next = NULL;
 		h1 = head;
 
-		h1	 =	lstMsort(h1,(len / 2));
-		h2	 =	lstMsort(h2, (len / 2));
-		head =	_lstSort_(h1, h2);
+		h1	 =	lstMsort(h1,(len / 2), cmp_func);
+		h2	 =	lstMsort(h2, (len / 2), cmp_func);
+		head =	_lstSort_(h1, h2, cmp_func);
 	}
 	return head;
 }
@@ -183,11 +180,11 @@ static inline _Node *lstMsort(_Node *head, int len)
 //List search
 
 //Returns a new node;
-static inline	_Node	*new_node() {return (_Node *)calloc(1 , sizeof(_Node));}
+static inline	_Node	*list_node() {return (_Node *)calloc(1 , sizeof(_Node));}
 
-static inline	_Node	*get_last(_Node *head) {while(head->next != NULL)head = head->next;return head;}
+static inline	_Node	*list_last(_Node *head) {while(head->next != NULL)head = head->next;return head;}
 
-static	_Node			*search_list(_Node *list, char *str)
+static			_Node	*list_search(_Node *list, char *str)
 {
 	while (list != NULL)
 	{
@@ -203,68 +200,12 @@ static	_Node			*search_list(_Node *list, char *str)
 
 //Here : list to array | arra to list by type : char *, int *, char **, int**;
 
-// static char *convert_intstr(int *array, size_t len, char *separator)
-// {
-// 	size_t i;
-// 	char *str;
-
-// 	i = 0;
-// 	str = "";
-// 	while (1)
-// 	{
-// 		// str = asprintf(&sre)
-// 		i++;
-// 		if (i >= len)
-// 			break ;
-// 		// str = join(str, separator);
-// 	}
-// 	return str;
-// }
-
-// static char			*strrev(char *str, int start, int end)
-// {
-// 	if (end == NULL)
-// 		end = strlen(str);
-// 	while (start < end)
-// 	{
-// 		swapi(&str[start], &str[end]);
-// 		start++;
-// 		end--;
-// 	}
-// 	return str;
-// }
 /////------------ Parsing functions ------------\\\\\
 
 // Returns a list of words from str, separated by delimiters
-static _Node		*fetch_words(char  *str, char *delimeters, size_t *len)
-{
-	_Node *list;
-	_Node *head;
-
-	head = new_node();
-	list = head;
-
-	if (str == '\0')
-		return NULL;
-	str = strtok(str, delimeters);
-	if (str == NULL)
-		return NULL;
-	while (1)
-	{
-		*len += 1;
-		list->data = (void *)str;
-		str = strtok(NULL, delimeters);
-		if (str == NULL)
-			break ;
-		list->next = new_node();
-		list = list->next;
-	}
-	list->next = NULL;
-	return head;
-}
 
 // Reads file into _File struct.
-static _File		fetch_file(char *filename, int trim)
+static _File		fetch_input_raw(char *filename, int trim)
 {
 	FILE	*file;
 	_File	data;
@@ -281,34 +222,18 @@ static _File		fetch_file(char *filename, int trim)
 	return data;
 }
 
-// Reads input file into a list of words. Words are sperated by *delimeter
-static _Node		*fetch_by_wordList(char *filename, char *delimeters, int trim, size_t *len)
+static int			fetch_input(char *filename, char **dest)
 {
-	_File	data;
-	_Node	*list;
-	char	*str;
+	_File file;
 
-	*len = 0;
-	data = fetch_file(filename, trim);
-	list = fetch_words(data.content, delimeters, len);
-	return list;
-}
+	file = fetch_input_raw(filename, 1);
+	_tmp_int = count_occurence(file.content, '\n');
 
-static _Node		*fetch_by_wordArr(char *filename, char *delimeters, int trim)
-{
-	_File	data;
-	_Node	*list;
-	char	*str;
-
-	*len = 0;
-	data = fetch_file(filename, trim);
-	*len = count_occurence(data.content, delimezzzzz);
-
-	return list;
+	// *dest = malloc(sizeof(char) * _tmp_int + 1);
+	//ARRAY ALLOC HERE
 }
 
 /////------------ MD5 functions ------------\\\\\
-
 static	void		format_hash(unsigned char hash[16], char *final)
 {
 	int n = 0;
