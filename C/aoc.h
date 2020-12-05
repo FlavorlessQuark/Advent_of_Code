@@ -1,30 +1,32 @@
 #ifndef AOC_H
 # define AOC_H
 
-# include <CommonCrypto/CommonDigest.h>
-# include <regex.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
+// # include <CommonCrypto/CommonDigest.h>
+// # include <regex.h>
 # include <sys/types.h>
+# include <stdbool.h>
+# include <stdlib.h>
 # include <limits.h>
 # include <string.h>
 # include <assert.h>
 # include <stddef.h>
-# include <math.h>
+# include <stdio.h>
 # include <ctype.h>
 # include <math.h>
 
-# define ABC_U	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# define ABC_L	"abcdefghijklmnopqrstuvwxyz"
-# define HEX_L	"0123456789abcdef"
-# define HEX_U	"0123456789ABCDEF"
-# define MATHC	"()x*"
-# define NUMS	"-0123456789"
-# define NMATHC	"0123456789-+()x*=/ "
+# define MATHC	("()x*")
+# define NUMS	("-0123456789")
+# define HEX_L	("0123456789abcdef")
+# define HEX_U	("0123456789ABCDEF")
+# define NMATHC	("0123456789-+()x*=/ ")
+# define ABC_U	("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+# define ABC_L	("abcdefghijklmnopqrstuvwxyz")
 
-# define _HIDDEN_ __attribute__((visibility("hidden")))
-# define _INTERN_ __attribute__((visibility("internal")))
+# define _HIDDEN_	 __attribute__((visibility("hidden")))
+# define _INTERN_	 __attribute__((visibility("internal")))
+
+# define ITER		 (_i)
+
 
 /////------------ Structs ------------\\\\\
 
@@ -49,6 +51,7 @@ typedef struct	vect
 
 void 	*_tmp_ptr;
 int		_tmp_int;
+size_t 	_i;
 /////------------ Utilities functions------------\\\\\
 
 // ADD count numbers for : list, char *;
@@ -72,11 +75,12 @@ static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NU
 
 static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1); snprintf(str, len,  "%s%s", s1,s2);return str;}
 
-static inline int	count_occurence(char *str, char *c){int count = 0; while((str = strstr(str, c) != NULL){count++;} return count;}
+static inline int	count_occurence(char *str, char *find) {int count = 0; size_t l = strlen(find); while ((str = strstr(str, find)) != NULL) {count++;str += l;} return count;}
 
-# define _DEBUG_(msg, ...) fprintf(stderr, "\033[1;91m[LOG](%s:%d) >>\033[0m "msg"\n", __FILE__, __LINE__, ##__VA_ARGS__)
 
 /////------------ Macros ------------\\\\\
+
+# define _DEBUG_(msg, ...) fprintf(stderr, "\033[1;91m[LOG](%s:%d) >>\033[0m "msg"\n", __FILE__, __LINE__, ##__VA_ARGS__)
 
 # define MAX(x, y)\
 	({__typeof__ (x) _x = (x);\
@@ -88,19 +92,33 @@ static inline int	count_occurence(char *str, char *c){int count = 0; while((str 
 	__typeof__ (y) _y = (y);\
 	_x > _y ? _y : _x;})
 
+# define FOREACH(condition, body){ _i = 0; while (condition){body; _i++;}}
+
+# define MAP_INPLACE(obj, func, len)						\
+{															\
+	FOREACH(obj, ITER < len, OBJ = func(OBJ))				\
+}															\
+
+# define MAP(obj, func, len, dest)							\
+{															\
+	_tmp_int = sizeof(func(obj[0]));						\
+	dest = calloc(_tmp_int, len);							\
+	FOREACH(ITER < len, dest[ITER] = func(obj[ITER]))		\
+}															\
+
 void _intp_	(int *ptr, size_t len)	{size_t i; i = 0;while (i < len) {printf("%d\n", ptr[i]); i++;};}
 void _boolp_(bool *ptr, size_t len)	{size_t i; i = 0;while (i < len) {ptr[i] == true ? printf("True\n") : printf("False\n"); i++;}}
 void _vectp_(_V2 **ptr, size_t len)	{size_t i; i = 0; while (i < len) {printf("(%d,%d)\n", ptr[i]->x, ptr[i]->y); i++;}}
-void _nodep_(_Node *ptr, size_t len){while (ptr != NULL){printf("%s\n", ptr->data);ptr = ptr->next;}}
+void _nodep_(_Node *ptr, size_t len){while (ptr != NULL){printf("%s\n", (char *)ptr->data);ptr = ptr->next;}}
 void _defp_	(void *ptr, size_t len)	{_DEBUG_("PRINTING WITH UNDEFINED TYPE (likely char *, use printf you moron)");}
 
 
-# define _PRINT_1D(array, size) _Generic((array),\
-	int		*: _intp_ ((int  *)array, size),\
-	bool	*: _boolp_((bool *)array, size),\
-	_Node	*: _nodep_((_Node *)array, size),\
-	_V2		**: _vectp_((_V2 **)array, size),\
-	default	 : _defp_ (array, size))
+# define _PRINT_1D(array, size) _Generic((array),	\
+	int		*: _intp_ ((int  *)array, size),		\
+	bool	*: _boolp_((bool *)array, size),		\
+	_Node	*: _nodep_((_Node *)array, size),		\
+	_V2		**: _vectp_((_V2 **)array, size),		\
+	default	 : _defp_ (array, size))				\
 
 /////------------ CMP functions ------------\\\\\
 
@@ -136,7 +154,7 @@ static inline void	strshift(int shift, char *str)
 /////------------ Sorting algorithms ------------\\\\\
 
 //Merge two sorted lists.
-_HIDDEN_ static _Node		*_lstSort_(_Node *h1, _Node *h2, int(*cmp_func)(void *, void *))
+static _Node		*_lstSort_(_Node *h1, _Node *h2, int(*cmp_func)(void *, void *))
 {
 	_Node head, *list;
 
@@ -154,7 +172,7 @@ _HIDDEN_ static _Node		*_lstSort_(_Node *h1, _Node *h2, int(*cmp_func)(void *, v
 }
 
 //List Merge Sort
-static inline _Node *lstMsort(_Node *head, int len, int(*cmp_func)(void *, void *))
+static inline _Node 		*lstMsort(_Node *head, int len, int(*cmp_func)(void *, void *))
 {
 	_Node	*h1, *h2;
 	int		i;
@@ -202,9 +220,6 @@ static			_Node	*list_search(_Node *list, char *str)
 
 /////------------ Parsing functions ------------\\\\\
 
-// Returns a list of words from str, separated by delimiters
-
-// Reads file into _File struct.
 static _File		fetch_input_raw(char *filename, int trim)
 {
 	FILE	*file;
@@ -219,40 +234,52 @@ static _File		fetch_input_raw(char *filename, int trim)
 	rewind(file);
 	fread(data.content, data.filesize - trim, 1, file);
 	fclose(file);
+
 	return data;
 }
 
-static int			fetch_input(char *filename, char **dest)
+// # define ALLOC(dest, size, func, meta)
+// {
+
+// }
+
+static int fetch_input(char *filename, char ***dest)
 {
 	_File file;
+	char **tmp;
 
-	file = fetch_input_raw(filename, 1);
-	_tmp_int = count_occurence(file.content, '\n');
+	file 	= fetch_input_raw(filename, 1);
+	_tmp_int= count_occurence(file.content, "\n") + 1;
+	tmp 	= malloc(sizeof(char *) * _tmp_int);
 
-	// *dest = malloc(sizeof(char) * _tmp_int + 1);
-	//ARRAY ALLOC HERE
+	*dest = tmp;
+	file.content = strtok(file.content, "\n");
+	FOREACH(file.content != NULL, (*dest)[ITER] = strdup(file.content); file.content = strtok(NULL, "\n"));
+
+	return _tmp_int;
 }
 
 /////------------ MD5 functions ------------\\\\\
-static	void		format_hash(unsigned char hash[16], char *final)
-{
-	int n = 0;
-	char str[3];
 
-	for (size_t i = 0; i < 16; ++i)
-	{
-		sprintf(str,"%.2x", hash[i]);
-		final[n] = str[0];
-		final[n + 1] = str[1];
-		n += 2;
-	}
-}
+// static	void		format_hash(unsigned char hash[16], char *final)
+// {
+// 	int n = 0;
+// 	char str[3];
 
-static inline void	get_new_hash(char *input, char *hash)
-{
-	unsigned char result[CC_MD5_DIGEST_LENGTH];
-	CC_MD5(input, strlen(input), result);
-	format_hash(result, hash);
-}
+// 	for (size_t i = 0; i < 16; ++i)
+// 	{
+// 		sprintf(str,"%.2x", hash[i]);
+// 		final[n] = str[0];
+// 		final[n + 1] = str[1];
+// 		n += 2;
+// 	}
+// }
+
+// static inline void	get_new_hash(char *input, char *hash)
+// {
+// 	unsigned char result[CC_MD5_DIGEST_LENGTH];
+// 	CC_MD5(input, strlen(input), result);
+// 	format_hash(result, hash);
+// }
 
 #endif
