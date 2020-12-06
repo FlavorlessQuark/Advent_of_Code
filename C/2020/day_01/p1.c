@@ -7,7 +7,7 @@ int	main()
 	int		*num;
 	char	**input;
 
-	i = fetch_input("input", &input);
+	i = fetch_input("input", &input, "\n");
 
 	MAP(input, atoi, i, num);
 

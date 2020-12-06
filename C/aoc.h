@@ -15,7 +15,8 @@
 # include <math.h>
 
 # define MATHC	("()x*")
-# define NUMS	("-0123456789")
+# define PNUMS  ("0123456789")
+# define NNUMS	("-0123456789")
 # define HEX_L	("0123456789abcdef")
 # define HEX_U	("0123456789ABCDEF")
 # define NMATHC	("0123456789-+()x*=/ ")
@@ -71,7 +72,7 @@ static inline void	_printnum(int *list, size_t len){size_t i; i = 0; while (i < 
 
 static inline int	numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
 
-static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NUMS); *number = atoi(str + spn); return spn + numlen(*number);}
+static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NNUMS); *number = atoi(str + spn); return spn + strspn(str + spn, PNUMS);}
 
 static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1); snprintf(str, len,  "%s%s", s1,s2);return str;}
 
@@ -243,24 +244,24 @@ static _File		fetch_input_raw(char *filename, int trim)
 
 // }
 
-static int fetch_input(char *filename, char ***dest)
+# define SPLIT(data, dest, sep) 													\
+{																					\
+	_tmp_int= count_occurence(data, sep) + 1;										\
+	*dest	= malloc(sizeof(char *) * _tmp_int);									\
+	data 	= strtok(data, sep);													\
+	FOREACH(data != NULL, (*dest)[ITER] = strdup(data); data = strtok(NULL, sep));	\
+}
+
+static int fetch_input(char *filename, char ***dest, char *sep)
 {
 	_File file;
 	char **tmp;
 
 	file 	= fetch_input_raw(filename, 1);
-	_tmp_int= count_occurence(file.content, "\n") + 1;
-	tmp 	= malloc(sizeof(char *) * _tmp_int);
-
-	*dest = tmp;
-	file.content = strtok(file.content, "\n");
-	FOREACH(file.content != NULL, (*dest)[ITER] = strdup(file.content); file.content = strtok(NULL, "\n"));
-
+	SPLIT(file.content, dest, sep)
 	return _tmp_int;
 }
-
 /////------------ MD5 functions ------------\\\\\
-
 // static	void		format_hash(unsigned char hash[16], char *final)
 // {
 // 	int n = 0;
