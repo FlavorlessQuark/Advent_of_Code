@@ -48,8 +48,6 @@ for instruction in inp:
 			dirs[d] += wdirs[d] * instruction[1]
 			wdirs[d] += dirs[d]
 		dirs[turns[curr]] += instruction[1]
-	else:
-		dirs[instruction[0]] += instruction[1]
 
 wdirs['N'] -= wdirs['S']
 wdirs['E'] -= wdirs['W']
