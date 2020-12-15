@@ -27,4 +27,4 @@ for x in range(i + 2, 30000001):
 				l[n] = [x]
 			else:
 				l[n].append(x)
-print(n)
+print("Solution : ", n)

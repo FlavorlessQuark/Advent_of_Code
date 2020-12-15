@@ -28,4 +28,4 @@ for x in range(i + 2, 2021):
 			else:
 				l[n].append(x)
 
-print(n)
+print("Solution : ", n)
