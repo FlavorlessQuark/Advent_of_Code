@@ -1,26 +1,35 @@
 import re
+import itertools
 from copy import deepcopy
 import time
 
 class Player:
-	HP = 50
-	Mana = 500
+	HP = 0
+	Mana = 0
 	Used_Mana = 0
 	Armor = 0
 	Effects = {}
 	Log = []
+	ID = 0
+
+	def __init__(self):
+		self.HP = 50
+		self.Mana = 500
+		self.Armor = 0
+		self.Effects = {}
+		self.Log = []
 
 	def apply_effect(self, boss):
-		player.Armor = 0
+		self.Armor = 0
 		for name, val in list(self.Effects.items()):
 			val[1](self, boss)
 			val[0] -= 1
-			print("Effect", name, "Remains :", val[0])
+			# print("Effect", name, "Remains :", val[0])
 			if val[0] == 0:
 				del self.Effects[name]
 
 	def status(self):
-		print("Player :", "HP :", self.HP, "| Mana :", self.Mana, "| Armor :", self.Armor, "| Used mana :",self.Used_Mana)
+		print("Player ", self.ID,":", "HP :", self.HP, "| Mana :", self.Mana, "| Armor :", self.Armor, "| Used mana :",self.Used_Mana)
 
 	def spent_mana(self):
 		return self.Used_Mana
@@ -30,10 +39,11 @@ class Boss:
 	HP = 0
 	Dmg = 0
 	def __init__(self):
-		self.HP, self.Dmg = map(int,re.findall(r'\d+', open('input').read()))
+		self.HP, self.Dmg = 71, 10
+		# self.HP, self.Dmg = map(int,re.findall(r'\d+', open('input').read()))
 
-	def status(self):
-		print("Boss : | HP", self.HP, "| Dmg :", self.Dmg)
+	# def status(self):
+		# print("Boss : | HP", self.HP, "| Dmg :", self.Dmg)
 
 def Shield(player, boss):
 	player.Armor = 7
@@ -62,9 +72,7 @@ Spells = {
 
 Minimum = 1000000
 
-
 def use_Spell(player, boss, name):
-	print("Player used :", name)
 
 	player.Mana -= Spells[name][0]
 	player.Used_Mana += Spells[name][0]
@@ -78,30 +86,32 @@ def check_end(player, boss):
 	global Minimum
 
 	if player.HP <= 0:
-		print("Player died")
 		return -1
 	if boss.HP <= 0:
-		print("Boss died")
-		print(player.Log)
-		exit()
+		print("BOSS DIED")
+		print(player.Log, player.Used_Mana)
 		Minimum = min(Minimum, player.Used_Mana)
 		return 1
-	if player.Mana < 53 or player.Used_Mana >= Minimum:
+	if player.Used_Mana >= Minimum:
 		return -1
 	return 0
 
 def player_turn(player, boss, spell):
-	print("Player turn ----")
+	player.HP -= 1
+	if player.HP <= 0:
+		return 1
 	player.apply_effect(boss)
 	if check_end(player, boss) != 0:
 		return 1
-	use_Spell(player, boss, spell)
+	if (player.Mana >= Spells[spell][0]):
+		use_Spell(player, boss, spell)
+	else:
+		return 1
 	if check_end(player, boss) != 0:
 		return 1
 	return 0
 
 def boss_turn(player, boss):
-	print("Boss turn ----")
 	player.apply_effect(boss)
 	if check_end(player, boss) != 0:
 		return 1
@@ -114,28 +124,24 @@ def boss_turn(player, boss):
 
 def turn(player, boss, spell):
 	player.Log.append(spell)
-	print("---------- Next Turn ---------")
-	player.status()
-	boss.status()
 
 	if player_turn(player, boss, spell) != 0:
-		return
+		return -1
 	if boss_turn(player, boss) != 0:
-		return
-	player.status()
-	boss.status()
-	for x in Spells:
-		if x not in player.Effects and player.Mana >= Spells[x][0]:
-			turn(deepcopy(player), deepcopy(boss), x)
-
-player = Player()
-boss= Boss()
+		return -1
+	return 0
 
 
-for x in Spells:
-	if x not in player.Effects and player.Mana >= Spells[x][0]:
-		turn(deepcopy(player), deepcopy(boss), x)
-		# next_turn(deepcopy(player), deepcopy(boss), Spells[x], x)
-
+combs = [x for x in itertools.product(Spells,repeat=15) if (x[0] != "Magic Missile" and x[0] != "Recharge")]
+t = []
+for n, way in enumerate(combs):
+	player = Player()
+	boss = Boss()
+	success = False
+	player.ID = n
+	for i, spell in enumerate(way):
+		if turn(player, boss, spell) != 0:
+			break
+	del player
+	del boss
 print("Solution : ", Minimum)
-# print(Spells["Drain"])/
