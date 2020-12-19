@@ -27,5 +27,5 @@ for x in r:
 rules['0'] = recurse(rules['0'])
 rules['0'] = "^" + rules['0'].replace("\"", "") + "$"
 
-print(sum([1 for x in strs if re.findall(rules['0'], x)]))
+print("Solution:", sum([1 for x in strs if re.findall(rules['0'], x)]))
 
