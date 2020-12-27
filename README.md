@@ -19,6 +19,7 @@ Need to Update aoc.h:
 **Some problems need better or redone solutions**
 
 ---
-Quick thoughts about things:
 
-Maybe it's worth it making iterators? It's getting tiring to rwrite the same iterating loop. It's like living on a merry-go-round.
+## Getting the input
+
+Usage: ./Ready_up.sh [Language] [Year] [Day]

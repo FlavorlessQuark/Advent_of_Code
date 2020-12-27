@@ -1,7 +1,15 @@
 from copy import copy
 
-
-
+class Linked:
+	def __init__(self,curr, n):
+		self.curr = curr
+		self.n = n
+	def __str__(self):
+		s = ""
+		s += " Curr: " + str(self.curr)
+		if self.n:
+			s += " Next: " + str(self.n.curr)
+		return str(s)
 with open('input') as input:
 	inp = [int(c)for line in input for c in line.rstrip()]
 

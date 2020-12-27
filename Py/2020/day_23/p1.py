@@ -1,6 +1,8 @@
 with open('input') as input:
 	inp = [int(c)for line in input for c in line.rstrip()]
 
+# print(inp)
+
 i = 0
 l = len(inp)
 m = min(inp)
@@ -11,6 +13,7 @@ for _ in range(10000000):
 	hold = []
 	lst = inp.copy()
 	save = int(inp[i])
+
 	for x in range(1, 4):
 		select = i + x
 		if select >= l:

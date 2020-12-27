@@ -16,7 +16,7 @@ c = loop(a)
 d = loop(b)
 def loop_s(times, s):
 	v = 1
-	for x in range(times):
+	for _ in range(times):
 		v = v * s
 		v = v % 20201227
 	return v
