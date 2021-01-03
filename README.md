@@ -22,4 +22,4 @@ Need to Update aoc.h:
 
 ## Getting the input
 
-Usage: ./Ready_up.sh [Language] [Year] [Day]
+Usage: ./Start.sh [Language] [Year] [Day]
