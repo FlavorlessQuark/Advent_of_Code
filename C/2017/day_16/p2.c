@@ -44,18 +44,14 @@ void exchange(char *str, int a, int b)
 	str[b] = c;
 }
 
-int	main()
+
+
+void dance(char **input, char *programs, int len)
 {
 	int i;
 	int x;
 	int y;
 	int tmp;
-	int len;
-	char *programs;
-	char **input;
-
-	programs = strdup("abcdefghijklmnop");
-	len = fetch_input("input", &input, ",");
 
 	i = 0;
 	while (i < len)
@@ -76,6 +72,37 @@ int	main()
 			partner(programs, input[i][1], input[i][3]);
 		}
 		i++;
+	}
+}
+
+int	main()
+{
+	int cycle;
+	int len;
+	char *programs;
+	char **input;
+
+	programs = strdup("abcdefghijklmnop");
+	len = fetch_input("input", &input, ",");
+
+	int n;
+	n = 0;
+	char *save = strdup(programs);
+	while (1)
+	{
+		if (n > 0 && !strcmp(programs, save))
+		{
+			cycle = n;
+			break ;
+		}
+		n++;
+		dance(input, programs, len);
+	}
+	cycle = 1000000000 % cycle;
+	while (cycle > 0)
+	{
+		dance(input, programs, len);
+		cycle--;
 	}
 	printf("Solution : %s\n", programs);
 }

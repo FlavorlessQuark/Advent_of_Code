@@ -1,0 +1,1 @@
+This assumes that given enough time - and dances - the program will eventually go back to its original state (in my case, it does s after 60 repetitions), however if this was not the case I do not know how one would get the answer to this problem, save for, of course actually running the simulation 1billion times
