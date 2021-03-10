@@ -2,21 +2,27 @@
 Christmas comes early this year
 https://adventofcode.com/
 
-## Reminder to self
+## About
 
-Windows files have CRLF file endings and must be converted via `dos2unix [filename]`
-Else some surprises may occur while parsing.
 
-Interestingly after learning python, I look at file parsing differently >.<
+Advent of Code (AoC) is a yearly coding contest spanning 25 days from December 1st to December 25th.
 
-Need to Update aoc.h:
+Each day see a new two part problem being released at midnight. Participants try to solve the problems the fastest to get on the leaderboard.
 
- - [ ] Dictionaries would be immensely useful
- - [ ] 1D, 2D, 3D, any D array allocation though I doubt I will need more than 2D
- - [ ] List len, append, prepend etc...
- - [ ] array append, prepend etc..
+Years fully solved :
+- 2015 : Python
+- 2016 : C
+- 2020 : C / Python
 
-**Some problems need better or redone solutions**
+In progress :
+
+- 2017 : C
+- 2018 : Python
+
+----
+
+Additionally , the C solutions are mostly using my own aoc.h header file which contains functions and macros that allow problems to be solved even faster.
+
 
 ---
 

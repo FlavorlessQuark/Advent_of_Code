@@ -37,6 +37,11 @@ mkdir -p $Language/$Year/$Day
 
 cd $Language/$Year/$Day
 
-touch p1.py p2.py
+if [ $Language = "C" ]
+then
+	touch p1.c p2.c
+else
+	touch p1.py p2.py
+fi
 
 curl --cookie ~/aoc_cookies.txt -o input \https://adventofcode.com/$Year/day/$(printf "%d" $3)/input
