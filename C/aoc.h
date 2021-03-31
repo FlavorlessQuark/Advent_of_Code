@@ -72,7 +72,7 @@ static inline void	_printnum(int *list, size_t len){size_t i; i = 0; while (i < 
 
 static inline int	numlen(int num){int len; if (num == 0) {return 1;}len = log10(abs(num)) + 1; return (num < 0) ? (len + 1) : (len);}
 
-static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NNUMS); *number = atoi(str + spn); return spn + strspn(str + spn, PNUMS);}
+static inline int	extract_num(char *str, int *number) {int spn = strcspn(str, NNUMS); *number = atoi(str + spn); return spn + strspn(str + spn, NNUMS);}
 
 static inline char	*join(char *s1, char *s2){ size_t len = strlen(s1) + strlen(s2) + 1; char* str; str = calloc(len, 1); snprintf(str, len,  "%s%s", s1,s2);return str;}
 
@@ -110,7 +110,7 @@ static inline int	count_occurence(char *str, char *find) {int count = 0; size_t 
 void _intp_	(int *ptr, size_t len)	{size_t i; i = 0;while (i < len) {printf("%d\n", ptr[i]); i++;};}
 void _boolp_(bool *ptr, size_t len)	{size_t i; i = 0;while (i < len) {ptr[i] == true ? printf("True\n") : printf("False\n"); i++;}}
 void _vectp_(_V2 **ptr, size_t len)	{size_t i; i = 0; while (i < len) {printf("(%d,%d)\n", ptr[i]->x, ptr[i]->y); i++;}}
-void _nodep_(_Node *ptr, size_t len){while (ptr != NULL){printf("%s\n", (char *)ptr->data);ptr = ptr->next;}}
+void _nodep_(_Node *ptr, size_t len){while (ptr != NULL && len > 0){printf("%d\n", (int)ptr->data);ptr = ptr->next;len--;}}
 void _defp_	(void *ptr, size_t len)	{_DEBUG_("PRINTING WITH UNDEFINED TYPE (likely char *, use printf you moron)");}
 
 

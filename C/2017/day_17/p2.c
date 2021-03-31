@@ -1,42 +1,24 @@
-struct animator
+#include "../../aoc.h"
+
+
+int	main()
 {
-	Texture *tex;
-	size_t offset;
-	size_t current;
-	double rotation;
-};
-struct entity
-{
-	size_t status;
-	Rectangle frame;
-	struct animator anim;
-	struct animation *a_set;
-};
+	int num;
+	int val;
+	int zero;
+	int i;
+	char **input;
 
-struct entity *init_entitiy(void)
-{
-	struct enity *res;
-	size_t	cycle;
+	fetch_input("input", &input, "\n");
+	extract_num(input[0], &num);
 
-	res = malloc(sizeof(*res));
-	//stuff;
-
-	res->a_set = get_animate_ent1();
-}
-
-struct animation
-{
-	texture	**anims;
-};
-
-
- animate_ent1(struct animator *dest, size_t status)
-{
-	static struct animation *a_set;
-
-	if (a_set == NULL)
-		init_set1(&a_set);
-	//Some boudns checking here,
-	dest->tex = a_set[status].anims[dest->current];
-	dest->current++;
+	i = 1;
+	val = 0;
+	while (i < 50000000)
+	{
+		if ((val = (val + 1 + num) % i) == 0)
+			zero = i;
+		i++;
+	}
+	printf("Solution : %d\n", zero);
 }
