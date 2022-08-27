@@ -8,19 +8,21 @@ Advent of Code (AoC) is a yearly coding contest spanning 25 days from December 1
 
 Each day sees a new two part problem being released at midnight. Participants try to solve the problems the fastest to get on the leaderboard.
 
-## Lnaguage choice
+## Language choice
 
 Although it may not have been the original reason why I chose them, I am sticking to C and Python exclusively to solve these problems. 
 
-Python is mainly used for the live event as it allows for faster coding (even though sometimes I would rather solve the problem in C). Problems solved this way aren't necessarily neat nor understandable, rather I hope to solve the problems as quickly and efficiently as I possibly can.
+**Python** is mainly used for the live event as it allows for faster coding (even though sometimes I would rather solve the problem in C). Problems solved this way aren't necessarily neat nor understandable, rather I hope to solve the problems as quickly and efficiently as I possibly can.
 
-C is mainly used to train for robustness and readability of the programs. In those I will take my time and implement them in an elegant and easy to understandable, readable and clean fashion. 
+**C** is mainly used to train for robustness and readability of the programs. In those I will take my time and implement them in an elegant and easy to understandable, readable and clean fashion. 
 
-Years fully solved :
+---
+
+**Years fully solved :**
 - 2015 : Python
 - 2020 : C / Python
 
-In progress :
+**In progress :**
 
 - 2016 : C
 - 2017 : C
