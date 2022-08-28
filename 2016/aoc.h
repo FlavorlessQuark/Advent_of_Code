@@ -1,7 +1,7 @@
 #ifndef AOC_H
 # define AOC_H
 
-# include <CommonCrypto/CommonDigest.h>
+// # include <CommonCrypto/CommonDigest.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -21,6 +21,9 @@
 # define MATHC	"()x*"
 # define NUMS	"0123456789"
 # define NMATHC	"0123456789-+()x*=/ "
+
+#define TRUE 1
+#define FALSE 0
 // Structs here
 
 typedef struct	s_list
@@ -54,6 +57,11 @@ typedef struct	vect
 	_x > _y ? _y : _x;})
 
 # define POW2(x)\
+
+/////----------- Sortung Functions -----------\\\\
+
+int sortAscending(void *a, void *b) {return *(int *)a - *(int *)b;};
+int sortDescending(void *a, void *b) {return *(int *)b - *(int *)a;};
 
 
 /////------------ Numbers functions------------\\\\\
@@ -179,18 +187,18 @@ void _printlst(_Node *lst)
 	}
 }
 
-char *strrev(char *str, int start, int end)
-{
-	if (end == NULL)
-		end = strlen(str);
-	while (start < end)
-	{
-		swapi(&str[start], &str[end]);
-		start++;
-		end--;
-	}
-	return str;
-}
+// char *strrev(char *str, int start, int end)
+// {
+// 	if (end == NULL)
+// 		end = strlen(str);
+// 	while (start < end)
+// 	{
+// 		swapi(&str[start], &str[end]);
+// 		start++;
+// 		end--;
+// 	}
+// 	return str;
+// }
 /////------------ Parsing functions ------------\\\\\
 
 // Returns a list of words from str, separated by delimiters
@@ -251,27 +259,27 @@ _Node *fetch_by_word(char *filename, char *delimeters, int trim, size_t *len)
 
 /////------------ MD5 functions ------------\\\\\
 
-void format_hash(unsigned char hash[16], char *final)
-{
-	int n = 0;
-	char str[3];
+// void format_hash(unsigned char hash[16], char *final)
+// {
+// 	int n = 0;
+// 	char str[3];
 
-	for (size_t i = 0; i < 16; ++i)
-	{
-		sprintf(str,"%.2x", hash[i]);
-		final[n] = str[0];
-		n++;
-		final[n] = str[1];
-		n++;
-	}
-}
+// 	for (size_t i = 0; i < 16; ++i)
+// 	{
+// 		sprintf(str,"%.2x", hash[i]);
+// 		final[n] = str[0];
+// 		n++;
+// 		final[n] = str[1];
+// 		n++;
+// 	}
+// }
 
-void get_new_hash(char *input, char *hash)
-{
-	unsigned char result[CC_MD5_DIGEST_LENGTH];
+// void get_new_hash(char *input, char *hash)
+// {
+// 	unsigned char result[CC_MD5_DIGEST_LENGTH];
 
-	CC_MD5(input, strlen(input), result);
-	format_hash(result, hash);
-}
+// 	CC_MD5(input, strlen(input), result);
+// 	format_hash(result, hash);
+// }
 
 #endif

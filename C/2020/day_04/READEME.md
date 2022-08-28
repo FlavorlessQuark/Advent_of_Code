@@ -1,3 +1,0 @@
-Really cannot be bothered to do part 2. It's been done in python, see the Py folder.
-
-Too much parsing...
