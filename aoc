@@ -25,7 +25,7 @@ function get(){
 }
 
 function submit() {
-	curl --cookie ~/aoc_cookies.txt -X POST https://adventofcode.com/$1/day/$(printf "%d" $2)/answer -H "Content-Type: application/x-www-form-urlencoded" -d "level="$3"&param2="$4
+	curl --cookie ~/aoc_cookies.txt -o response.txt -X POST https://adventofcode.com/$1/day/$(printf "%d" $2)/answer -H "Content-Type: application/x-www-form-urlencoded" -d "level="$3"&answer="$4
 }
 
 function run() {
@@ -34,7 +34,6 @@ function run() {
 	cd "day_"$(printf "%02d" $2)
 	if [ $lang = "c" ]
 	then
-		echo gcc -lm p$3.c && ./a.out
 		gcc -lm p$3.c && ./a.out
 	else
 		python3 p$3.py
