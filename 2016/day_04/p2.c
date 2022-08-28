@@ -1,4 +1,4 @@
-#include "../aoc.h"
+#include "../../aoc.h"
 
 char shiftLetter(char letter, int shiftAmount)
 {
