@@ -1,4 +1,4 @@
-# include "../aoc.h"
+# include "../../aoc.h"
 
 typedef struct s_Tile
 {
@@ -68,7 +68,7 @@ int main()
 	i = 0;
 	location = 1;
 	number = 1364;
-	
+
 	list = malloc(sizeof(_Tile));
 	list->x = 1;
 	list->y = 1;
@@ -76,22 +76,34 @@ int main()
 	list->next = NULL;
 	head = list;
 
-	while (i < 50)
+	while (list)
 	{
-		if (check_wall(list->x + 1, list->y, number) && check_list(list->x + 1, list->y, head, &location))
+		if (check_wall(list->x + 1, list->y, number) && check_list(list->x + 1, list->y, head, &location) && list->value < 50)
+		{
 			new_tile(list, list->x + 1, list->y);
+		}
 
-		if (check_wall(list->x - 1, list->y, number) && check_list(list->x - 1, list->y, head, &location))
+		if (check_wall(list->x - 1, list->y, number) && check_list(list->x - 1, list->y, head, &location) && list->value < 50)
+		{
 			new_tile(list, list->x - 1, list->y);
+		}
 
-		if (check_wall(list->x, list->y + 1, number) && check_list(list->x, list->y + 1, head, &location))
+		if (check_wall(list->x, list->y + 1, number) && check_list(list->x, list->y + 1, head, &location) && list->value < 50)
+		{
 			new_tile(list, list->x, list->y + 1);
+		}
 
-		if (check_wall(list->x + 1, list->y - 1, number) && check_list(list->x, list->y - 1, head, &location))
+		if (check_wall(list->x + 1, list->y - 1, number) && check_list(list->x, list->y - 1, head, &location) && list->value < 50)
+		{
 			new_tile(list, list->x + 1, list->y - 1);
+		}
 		list = list->next;
 		i++;
 	}
+	while (head)
+	{
+		head = head->next;
+	}
 
-	printf("%d\n", location);
+	printf("%d %d\n", location);
 }
