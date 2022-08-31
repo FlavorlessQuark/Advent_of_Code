@@ -34,7 +34,7 @@ function run() {
 	cd "day_"$(printf "%02d" $2)
 	if [ $lang = "c" ]
 	then
-		gcc -lm p$3.c && ./a.out
+		gcc -g -fsanitize=address -lm p$3.c && ./a.out
 	else
 		python3 p$3.py
 	fi
